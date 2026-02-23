@@ -1,0 +1,134 @@
+---
+title: "Opening Performance"
+subtitle: "Which openings work best for you?"
+---
+
+```{r setup}
+source(here::here("R", "functions.R"))
+library(DT)
+con <- get_site_db()
+player_moves <- load_site_player_moves(con)
+games <- load_site_games(con)
+```
+
+## Top Openings by Accuracy
+
+```{r opening-table}
+opening_perf <- calculate_opening_performance(player_moves %>% filter(is_player_move))
+
+opening_perf %>%
+  select(ECO = eco_code, Opening = opening_name, Accuracy = accuracy,
+         `Avg CP Loss` = avg_cp_loss, Games = n_games, Moves = n_moves) %>%
+  mutate(Accuracy = round(Accuracy, 1), `Avg CP Loss` = round(`Avg CP Loss`, 1)) %>%
+  datatable(
+    options = list(pageLength = 15, order = list(list(2, "desc"))),
+    rownames = FALSE,
+    class = "compact stripe"
+  ) %>%
+  formatStyle("Accuracy",
+    background = styleColorBar(range(opening_perf$accuracy), "#b58863"),
+    backgroundSize = "98% 88%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  )
+```
+
+## Opening Accuracy Chart
+
+```{r opening-chart}
+top_openings <- opening_perf %>%
+  head(15) %>%
+  mutate(
+    label = ifelse(nchar(opening_name) > 30, paste0(substr(opening_name, 1, 27), "..."), opening_name)
+  )
+
+plot_ly(top_openings, x = ~accuracy, y = ~reorder(label, accuracy), type = "bar",
+        orientation = "h",
+        marker = list(color = ~accuracy, colorscale = list(c(0, "#b58863"), c(1, "#f0d9b5"))),
+        text = ~sprintf("%.1f%% (%d games)", accuracy, n_games),
+        textposition = "outside",
+        hovertemplate = "%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra></extra>",
+        customdata = ~n_games) %>%
+  layout(
+    title = list(text = "Top 15 Openings by Accuracy", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Accuracy (%)", range = c(0, 105), gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "", gridcolor = "rgba(255,255,255,0.1)"),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd"),
+    margin = list(l = 200)
+  )
+```
+
+## Win Rate by Opening
+
+```{r win-rate}
+win_rates <- games %>%
+  filter(!is.na(eco_code)) %>%
+  mutate(
+    player_color = ifelse(tolower(white_username) == tolower(SITE_USERNAME), "white", "black"),
+    player_result = case_when(
+      result == "1-0" & player_color == "white" ~ "Win",
+      result == "0-1" & player_color == "black" ~ "Win",
+      result == "1/2-1/2" ~ "Draw",
+      TRUE ~ "Loss"
+    )
+  ) %>%
+  group_by(eco_code, opening_name) %>%
+  summarise(
+    total = n(),
+    wins = sum(player_result == "Win"),
+    draws = sum(player_result == "Draw"),
+    losses = sum(player_result == "Loss"),
+    win_rate = wins / total * 100,
+    .groups = "drop"
+  ) %>%
+  filter(total >= 3) %>%
+  arrange(desc(win_rate))
+
+win_rates %>%
+  head(20) %>%
+  select(ECO = eco_code, Opening = opening_name, Games = total,
+         Wins = wins, Draws = draws, Losses = losses, `Win %` = win_rate) %>%
+  mutate(`Win %` = round(`Win %`, 1)) %>%
+  datatable(
+    options = list(pageLength = 15, order = list(list(6, "desc"))),
+    rownames = FALSE,
+    class = "compact stripe"
+  )
+```
+
+## Repertoire — White vs Black
+
+```{r repertoire-split}
+repertoire <- games %>%
+  filter(!is.na(opening_name)) %>%
+  mutate(
+    player_color = ifelse(tolower(white_username) == tolower(SITE_USERNAME), "White", "Black")
+  ) %>%
+  group_by(player_color, eco_code, opening_name) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(player_color) %>%
+  slice_max(n, n = 10) %>%
+  ungroup()
+
+plot_ly(repertoire, x = ~n, y = ~reorder(opening_name, n), type = "bar",
+        orientation = "h", color = ~player_color,
+        colors = c("White" = "#f0d9b5", "Black" = "#b58863"),
+        hovertemplate = "%{y}<br>Games: %{x}<extra></extra>") %>%
+  layout(
+    title = list(text = "Most Played Openings by Color", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Games Played", gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "", gridcolor = "rgba(255,255,255,0.1)"),
+    barmode = "group",
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd"),
+    legend = list(orientation = "h", y = -0.15),
+    margin = list(l = 200)
+  )
+```
+
+```{r cleanup}
+disconnect_db(con)
+```

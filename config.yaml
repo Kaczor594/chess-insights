@@ -1,0 +1,32 @@
+# Chess Insights Configuration
+
+# Database path (relative to project root or absolute)
+database_path: data/chess_insights.db
+
+# Stockfish engine configuration
+stockfish:
+  # Path to Stockfish executable
+  path: /Users/isaackaczor/Downloads/stockfish/stockfish-macos-m1-apple-silicon
+
+  # Default analysis depth (15, 18, 20, or 25)
+  default_depth: 15
+
+  # Number of CPU threads for analysis
+  threads: 4
+
+  # Hash table size in MB
+  hash_mb: 256
+
+  # Maximum centipawn value (positions beyond this are capped)
+  centipawn_cap: 9999
+
+# API client configuration
+api:
+  # Delay between Chess.com API requests (seconds)
+  chesscom_delay: 0.5
+
+  # Delay between Lichess API requests (seconds)
+  lichess_delay: 0.3
+
+  # User agent string for API requests
+  user_agent: chess-insights/1.0

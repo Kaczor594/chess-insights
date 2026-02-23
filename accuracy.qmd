@@ -1,0 +1,91 @@
+---
+title: "Accuracy Trends"
+subtitle: "How accurate is your play over time?"
+---
+
+```{r setup}
+source(here::here("R", "functions.R"))
+con <- get_site_db()
+player_moves <- load_site_player_moves(con)
+games <- load_site_games(con)
+```
+
+## Overall Accuracy Trend
+
+```{r accuracy-trend}
+acc_trend <- calculate_accuracy_trend(player_moves, window_size = 10)
+
+p <- plot_accuracy_trend(acc_trend)
+ggplotly(p) %>%
+  layout(
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+## Accuracy by Time Control
+
+```{r accuracy-by-tc}
+tc_accuracy <- player_moves %>%
+  filter(is_player_move, !is.na(centipawn_loss), !is.na(time_control_seconds)) %>%
+  mutate(tc_category = classify_time_control(time_control_seconds)) %>%
+  group_by(game_id, tc_category) %>%
+  summarise(
+    accuracy = calculate_accuracy(mean(centipawn_loss, na.rm = TRUE)),
+    .groups = "drop"
+  ) %>%
+  group_by(tc_category) %>%
+  summarise(
+    mean_accuracy = mean(accuracy, na.rm = TRUE),
+    sd_accuracy = sd(accuracy, na.rm = TRUE),
+    n_games = n(),
+    .groups = "drop"
+  ) %>%
+  filter(n_games >= 2)
+
+plot_ly(tc_accuracy, x = ~tc_category, y = ~mean_accuracy, type = "bar",
+        marker = list(color = c("Bullet" = "#F44336", "Blitz" = "#FF9800",
+                                "Rapid" = "#4CAF50", "Classical" = "#2E86AB")[tc_accuracy$tc_category]),
+        error_y = list(array = ~sd_accuracy, color = "#adb5bd"),
+        hovertemplate = "%{x}<br>Accuracy: %{y:.1f}%<br>Games: %{customdata}<extra></extra>",
+        customdata = ~n_games) %>%
+  layout(
+    title = list(text = "Average Accuracy by Time Control", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Time Control", gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Accuracy (%)", range = c(0, 100), gridcolor = "rgba(255,255,255,0.1)"),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+## Accuracy Distribution
+
+```{r accuracy-dist}
+game_accuracy <- calculate_game_accuracy(player_moves %>% filter(is_player_move))
+
+p <- plot_accuracy_distribution(game_accuracy)
+ggplotly(p) %>%
+  layout(
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+## Rating vs Accuracy
+
+```{r rating-accuracy}
+p <- plot_rating_accuracy(acc_trend)
+ggplotly(p) %>%
+  layout(
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+```{r cleanup}
+disconnect_db(con)
+```

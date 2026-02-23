@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Opening Performance – Chess Insights</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f7415341d87a957c03202124dd040634.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.34.0/datatables.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="site_libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Chess Insights</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./accuracy.html"> 
+<span class="menu-text">Accuracy</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./openings.html" aria-current="page"> 
+<span class="menu-text">Openings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./phases.html"> 
+<span class="menu-text">Game Phases</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./time-management.html"> 
+<span class="menu-text">Time Management</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#top-openings-by-accuracy" id="toc-top-openings-by-accuracy" class="nav-link active" data-scroll-target="#top-openings-by-accuracy">Top Openings by Accuracy</a></li>
+  <li><a href="#opening-accuracy-chart" id="toc-opening-accuracy-chart" class="nav-link" data-scroll-target="#opening-accuracy-chart">Opening Accuracy Chart</a></li>
+  <li><a href="#win-rate-by-opening" id="toc-win-rate-by-opening" class="nav-link" data-scroll-target="#win-rate-by-opening">Win Rate by Opening</a></li>
+  <li><a href="#repertoire-white-vs-black" id="toc-repertoire-white-vs-black" class="nav-link" data-scroll-target="#repertoire-white-vs-black">Repertoire — White vs Black</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Opening Performance</h1>
+<p class="subtitle lead">Which openings work best for you?</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="top-openings-by-accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="top-openings-by-accuracy">Top Openings by Accuracy</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6c8502fc04a1a6e02315" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6c8502fc04a1a6e02315">{"x":{"filter":"none","vertical":false,"data":[["C47","A00","B07","D04","D02","C41","B01","A00","A00","A00","A00","A00","A46","B00","B00","B00","B00","B00","B01","B07","B07","B07","B15","B15","B15","B18","B21","B21","C00","C00","C10","C20","C20","C21","C21","C22","C22","C22","C22","C22","C22","C24","C24","C25","C25","C25","C26","C28","C30","C30","C40","C41","C41","C42","C42","C42","C42","C43","C44","C44","C45","C45","C45","C46","C46","C47","C47","C47","C47","C47","C47","C47","C48","C50","C50","C50","C50","C50","C50","C50","C50","C55","C55","C55","C57","C57","C58","C58","C65","C65","C65","C65","C65","C67","C67","C68","C77","D00","D00","D00","D00","D00","D00","D00","D00","D00","D00","D02","D02","D02","D02","D06","D20","D20","D20"],["Four Knights Game","Van Geet Opening","Pirc Defense Maroczy Defense 3.Dxe5 Dxe5 4.Qxd8 Kxd8","Colle System","Queens Pawn Opening Symmetrical Variation 3.C4","Philidor Defense 3.Nc3","Scandinavian Defense Closed 2...D4","Undefined","Van T Kruijs Opening","Van T Kruijs Opening 1...D5","Van T Kruijs Opening 1...E5","Van T Kruijs Opening 1...Nf6","Indian Game Knights Variation 2...E6 3.Nc3 D5","Nimzowitsch Defense Kennedy Keres Attack","Nimzowitsch Defense Kennedy Linksspringer Variation","Nimzowitsch Defense Kennedy Paulsen Attack","Nimzowitsch Defense Kennedy Variation 3.Dxe5 Nxe5","Owens Defense...4.Nf3 Bb4 5.Bd3 Nf6","Scandinavian Defense Mieses Kotrc Variation 3.Nf3 Bg4","Pirc Defense Maroczy Defense","Pirc Defense Maroczy Defense 3.Dxe5","Pirc Defense Modern Defense Geller System 2...Nf6 3.Nc3 E5","Caro Kann Defense Main Line 4...Nf6 5.Ng3","Caro Kann Defense Tartakower Variation 6.Nf3","Caro Kann Defense Tartakower Variation 6.Nf3 Bd6","Caro Kann Defense Classical Variation 5.Ng3 Bg6 6.Nf3 Nf6","Sicilian Defense Smith Morra Gambit 2...Cxd4 3.Qxd4","Sicilian Defense Smith Morra Gambit 2...Cxd4 3.Qxd4 Nc6","French Defense Normal Variation","French Defense Queens Knight Variation","French Defense Rubinstein Variation 4.Nxe4","Kings Pawn Opening 1...E5","Kings Pawn Opening Leonardis Variation","Center Game","Center Game Accepted 3.Qxd4","Center Game Accepted Normal Variation","Center Game Accepted Paulsen Attack","Center Game Accepted Paulsen Attack 4...G6 5.Nc3 Bg7 6.Bd2","Center Game Accepted Paulsen Berger Variation 5.Nc3","Center Game Accepted Paulsen Berger Variation 5.Nc3 Bb4 6.Bd2","Center Game Accepted Paulsen Berger Variation...6.Bd2 O O 7.O O O Re8","Bishops Opening Berlin Defense","Bishops Opening Berlin Defense 3.D3 D5 4.Exd5 Nxd5","Vienna Game","Vienna Game 2...D6","Vienna Game Anderssen Defense 3.Nf3","Vienna Game Falkbeer Variation","Vienna Game Falkbeer Vienna Gambit","Kings Gambit Declined Queens Knight Defense","Kings Gambit Declined Queens Knight Defense 3.Nf3","Kings Pawn Opening Kings Knight Variation","Philidor Defense","Philidor Defense Nimzowitsch Variation 4.Nc3","Petrovs Defense 3.D3 Nc6","Petrovs Defense Classical Variation","Petrovs Defense Three Knights Game","Petrovs Defense Three Knights Game 3...Bb4 4.Nxe5","Petrovs Defense Steinitz Attack Symmetrical Variation 4.Dxe5","Kings Pawn Opening Kings Knight Variation 2...Nc6 3.D3","Ponziani Opening Jaenisch Counterattack","Scotch Game","Scotch Game 3...D6","Scotch Game...4.Nxd4 Nxd4 5.Qxd4 D6","Three Knights Opening","Three Knights Opening 3...Bc5","Four Knights Game 4.Be2","Four Knights Game Gunsberg Variation","Four Knights Game Italian Variation","Four Knights Game Scotch Variation","Four Knights Game Scotch Variation 4...Bb4","Four Knights Game Scotch Variation Accepted 5.Nxd4","Four Knights Game Scotch Variation Accepted 5.Nxd4 Bb4","Four Knights Game Spanish Variation Classical Variation 5.O O O O","Giuoco Piano Game 4.O O Nf6 5.D3 O O 6.Bg5","Giuoco Piano Game Four Knights Game","Giuoco Piano Game Four Knights Game 5.O O","Giuoco Piano Game Giuoco Pianissimo Italian Four Knights Variation 5...O O","Giuoco Piano Game Giuoco Pianissimo Variation 4...Nf6","Giuoco Piano Game Giuoco Pianissimo Variation 4...Nf6 5.Bg5","Giuoco Piano Game Giuoco Pianissimo Variation 4...Nf6 5.Bg5 H6 6.Bh4","Italian Game","Italian Game Two Knights Defense","Italian Game Two Knights Modern Bishops Opening 4...D5 5.Exd5 Nxd5","Italian Game Two Knights Open","Italian Game Knight Attack Normal Variation 5.Exd5","Italian Game Knight Attack Polerio Defense","Italian Game Knight Attack Polerio Bishop Check Line 6...C6 7.Dxc6 Bxc6","Italian Game Knight Attack Polerio Bishop Check Line...7.Dxc6 Bxc6 8.Bd3 H6 9.Ne4","Ruy Lopez Opening Berlin Defense 4.Bxc6","Ruy Lopez Opening Berlin Defense 4.Bxc6 Dxc6","Ruy Lopez Opening Berlin Defense 4.D3","Ruy Lopez Opening Berlin Defense 4.D3 Bc5","Ruy Lopez Opening Berlin Defense 4.D3 Bc5 5.Bxc6 Dxc6","Ruy Lopez Opening Berlin Rio Gambit Accepted 5.D4","Ruy Lopez Opening Berlin Rio Gambit Accepted 5.Re1","Ruy Lopez Opening Morphy Defense Exchange Lutikov Variation","Ruy Lopez Opening Morphy Defense Tarrasch Variation 5...B5 6.Bb3","Queens Pawn Opening 1...D5","Queens Pawn Opening 1...D5 2.C3","Queens Pawn Opening Accelerated London System","Queens Pawn Opening Accelerated London System 2...Nf6 3.E3","Queens Pawn Opening Chigorin Variation","Queens Pawn Opening Chigorin Variation 2...E6","Queens Pawn Opening Chigorin Variation 2...Nf6","Queens Pawn Opening Chigorin Variation 2...Nf6 3.Bf4","Queens Pawn Opening Chigorin Variation 2...Nf6 3.Nf3","Queens Pawn Opening Chigorin Variation 2...Nf6 3.Nf3 Bf5","Queens Pawn Opening Zukertort Chigorin Variation","Queens Pawn Opening Zukertort Chigorin Variation 3.Bf4","Queens Pawn Opening Zukertort Chigorin Variation 3.Bf4 Nf6 4.E3","Queens Pawn Opening Zukertort Chigorin Variation 3.E3","Queens Gambit Declined Marshall Defense 3.Nc3","Queens Gambit Accepted 3.Nc3 Nf6 4.E3","Queens Gambit Accepted Central Variation Alekhine System 4.Nc3","Queens Gambit Accepted Old Variation 3...Nf6 4.Bxc4"],[16.2,14.9,13,7.2,5.6,4.6,0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[38.4,40.1,42.6,52.7,56.7,59.4,79,185.7,356.2,332.2,699.6,81.7,484.3,313.1,359.4,159.4,288.7,663.1,227.1,274.4,185,252.2,142,383,289.7,214.1,147.5,280.4,275.4,559.9,619.6,216.4,183,289.3,175.1,158,247.9,465.5,267.3,195.3,301,291.7,162.9,473.5,564.6,618,283.7,269.2,232.9,250.3,170.9,290.8,684.1,123.6,315.8,472.9,472.7,185.8,435.1,554.9,297.8,345.2,179.6,290.2,418,253.6,149.1,282.6,229.6,261.8,384.1,485.8,132.6,124.4,168.8,140.2,134.9,342.3,194.9,471.2,167.3,483.8,430.7,226.9,403.4,187.6,217.2,162.6,175.2,158.3,242.7,231.3,224.4,152.2,130.5,352.8,662,219,241,196,185.4,411.4,256.1,464.6,382.7,359.6,138.5,214.8,541.8,196.1,178.8,220.5,261.1,143,516.4],[3,3,5,3,3,4,5,6,7,6,5,4,8,6,4,5,3,4,3,3,4,8,3,3,8,4,5,46,9,6,3,35,4,16,14,5,72,3,11,8,6,12,6,15,6,3,4,6,4,13,3,3,5,4,4,8,3,3,4,5,20,14,3,3,3,3,4,10,11,6,10,4,4,4,9,16,8,6,3,4,19,3,9,4,11,3,3,3,4,3,4,3,3,4,4,4,3,4,3,13,3,15,10,3,8,32,10,6,3,15,3,3,6,6,3],[114,55,243,101,75,111,125,231,195,195,207,124,281,202,181,229,94,109,166,130,147,283,87,56,359,113,216,1651,420,145,82,996,83,631,564,97,2621,70,410,259,157,357,213,378,228,118,157,183,121,421,81,109,174,183,115,257,94,78,195,165,665,532,98,81,53,109,106,369,354,163,336,98,116,129,310,665,329,161,64,153,499,114,293,60,307,63,107,73,192,126,111,107,109,113,195,74,129,118,104,502,136,467,258,71,176,1139,329,240,82,544,108,63,195,213,105]],"container":"<table class=\"compact stripe\">\n  <thead>\n    <tr>\n      <th>ECO<\/th>\n      <th>Opening<\/th>\n      <th>Accuracy<\/th>\n      <th>Avg CP Loss<\/th>\n      <th>Games<\/th>\n      <th>Moves<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":15,"order":[[2,"desc"]],"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"name":"ECO","targets":0},{"name":"Opening","targets":1},{"name":"Accuracy","targets":2},{"name":"Avg CP Loss","targets":3},{"name":"Games","targets":4},{"name":"Moves","targets":5}],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,15,25,50,100],"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + Math.max(16.198726 - value, 0)/16.198726 * 100 + '%, #b58863 ' + Math.max(16.198726 - value, 0)/16.198726 * 100 + '%)','background-size':'98% 88%','background-repeat':'no-repeat','background-position':'center'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="opening-accuracy-chart" class="level2">
+<h2 class="anchored" data-anchor-id="opening-accuracy-chart">Opening Accuracy Chart</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f73f315aea7963fa114c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f73f315aea7963fa114c">{"x":{"visdat":{"152587d81162f":["function () ","plotlyVisDat"]},"cur_data":"152587d81162f","attrs":{"152587d81162f":{"x":{},"y":{},"orientation":"h","marker":{"color":{},"colorscale":[["0","#b58863"],["1","#f0d9b5"]]},"text":{},"textposition":"outside","hovertemplate":"%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","customdata":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":200,"t":25,"r":10},"title":{"text":"Top 15 Openings by Accuracy","font":{"color":"#f0d9b5"}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Accuracy (%)","range":[0,105],"gridcolor":"rgba(255,255,255,0.1)"},"yaxis":{"domain":[0,1],"automargin":true,"title":"","gridcolor":"rgba(255,255,255,0.1)","type":"category","categoryorder":"array","categoryarray":["Indian Game Knights Variati...","Nimzowitsch Defense Kennedy...","Undefined","Van T Kruijs Opening","Van T Kruijs Opening 1...D5","Van T Kruijs Opening 1...E5","Van T Kruijs Opening 1...Nf6","Scandinavian Defense Closed...","Philidor Defense 3.Nc3","Queens Pawn Opening Symmetr...","Colle System","Pirc Defense Maroczy Defens...","Van Geet Opening","Four Knights Game"]},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","font":{"color":"#adb5bd"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[16.198725792394583,14.869243759231969,12.967859621304227,7.2361649643185064,5.558071694941038,4.6150726191215732,0.14579561520338169,0,0,0,0,0,0,0,0],"y":["Four Knights Game","Van Geet Opening","Pirc Defense Maroczy Defens...","Colle System","Queens Pawn Opening Symmetr...","Philidor Defense 3.Nc3","Scandinavian Defense Closed...","Undefined","Van T Kruijs Opening","Van T Kruijs Opening 1...D5","Van T Kruijs Opening 1...E5","Van T Kruijs Opening 1...Nf6","Indian Game Knights Variati...","Nimzowitsch Defense Kennedy...","Nimzowitsch Defense Kennedy..."],"orientation":"h","marker":{"color":[16.198725792394583,14.869243759231969,12.967859621304227,7.2361649643185064,5.558071694941038,4.6150726191215732,0.14579561520338169,0,0,0,0,0,0,0,0],"colorscale":[["0","#b58863"],["1","#f0d9b5"]],"line":{"color":"rgba(31,119,180,1)"}},"text":["16.2% (3 games)","14.9% (3 games)","13.0% (5 games)","7.2% (3 games)","5.6% (3 games)","4.6% (4 games)","0.1% (5 games)","0.0% (6 games)","0.0% (7 games)","0.0% (6 games)","0.0% (5 games)","0.0% (4 games)","0.0% (8 games)","0.0% (6 games)","0.0% (4 games)"],"textposition":["outside","outside","outside","outside","outside","outside","outside","outside","outside","outside","outside","outside","outside","outside","outside"],"hovertemplate":["%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>","%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra><\/extra>"],"customdata":[3,3,5,3,3,4,5,6,7,6,5,4,8,6,4],"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="win-rate-by-opening" class="level2">
+<h2 class="anchored" data-anchor-id="win-rate-by-opening">Win Rate by Opening</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-85d1599ea18edb2c6908" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-85d1599ea18edb2c6908">{"x":{"filter":"none","vertical":false,"data":[["A00","B15","C10","C20","C41","C46","C47","C48","C57","C58","B00","B07","B21","A00","C26","C30","C22","C45","C22","B21"],["Van Geet Opening","Caro Kann Defense Tartakower Variation 6.Nf3","French Defense Rubinstein Variation 4.Nxe4","Kings Pawn Opening Leonardis Variation","Philidor Defense Nimzowitsch Variation 4.Nc3","Three Knights Opening","Four Knights Game Scotch Variation Accepted 5.Nxd4 Bb4","Four Knights Game Spanish Variation Classical Variation 5.O O O O","Italian Game Knight Attack Polerio Defense","Italian Game Knight Attack Polerio Bishop Check Line 6...C6 7.Dxc6 Bxc6","Nimzowitsch Defense Kennedy Paulsen Attack","Pirc Defense Maroczy Defense 3.Dxe5 Dxe5 4.Qxd8 Kxd8","Sicilian Defense Smith Morra Gambit 2...Cxd4 3.Qxd4","Van T Kruijs Opening 1...Nf6","Vienna Game Falkbeer Variation","Kings Gambit Declined Queens Knight Defense","Center Game Accepted Paulsen Berger Variation 5.Nc3","Scotch Game 3...D6","Center Game Accepted Paulsen Attack","Sicilian Defense Smith Morra Gambit 2...Cxd4 3.Qxd4 Nc6"],[3,3,3,4,5,3,4,4,3,3,5,5,5,4,4,4,11,14,72,46],[3,3,3,4,5,3,4,4,3,3,4,4,4,3,3,3,8,10,50,31],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0],[0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,2,4,21,15],[100,100,100,100,100,100,100,100,100,100,80,80,80,75,75,75,72.7,71.40000000000001,69.40000000000001,67.40000000000001]],"container":"<table class=\"compact stripe\">\n  <thead>\n    <tr>\n      <th>ECO<\/th>\n      <th>Opening<\/th>\n      <th>Games<\/th>\n      <th>Wins<\/th>\n      <th>Draws<\/th>\n      <th>Losses<\/th>\n      <th>Win %<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":15,"order":[[6,"desc"]],"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6]},{"name":"ECO","targets":0},{"name":"Opening","targets":1},{"name":"Games","targets":2},{"name":"Wins","targets":3},{"name":"Draws","targets":4},{"name":"Losses","targets":5},{"name":"Win %","targets":6}],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,15,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="repertoire-white-vs-black" class="level2">
+<h2 class="anchored" data-anchor-id="repertoire-white-vs-black">Repertoire — White vs Black</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-0b217f810c3175a583e5" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-0b217f810c3175a583e5">{"x":{"visdat":{"15258453000":["function () ","plotlyVisDat"]},"cur_data":"15258453000","attrs":{"15258453000":{"x":{},"y":{},"orientation":"h","hovertemplate":"%{y}<br>Games: %{x}<extra><\/extra>","color":{},"colors":["#f0d9b5","#b58863"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":200,"t":25,"r":10},"title":{"text":"Most Played Openings by Color","font":{"color":"#f0d9b5"}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Games Played","gridcolor":"rgba(255,255,255,0.1)"},"yaxis":{"domain":[0,1],"automargin":true,"title":"","gridcolor":"rgba(255,255,255,0.1)","type":"category","categoryorder":"array","categoryarray":["Queens Pawn Opening Chigorin Variation 2...E6","Queens Pawn Opening Chigorin Variation 2...Nf6 3.Nf3 Bf5","Center Game Accepted Paulsen Berger Variation 5.Nc3","Italian Game Knight Attack Normal Variation 5.Exd5","Bishops Opening Berlin Defense","Kings Gambit Declined Queens Knight Defense 3.Nf3","Queens Pawn Opening Accelerated London System","Queens Pawn Opening Chigorin Variation","Scotch Game 3...D6","Center Game Accepted 3.Qxd4","Center Game","Queens Pawn Opening Zukertort Chigorin Variation 3.Bf4 Nf6 4.E3","Vienna Game","Giuoco Piano Game Four Knights Game 5.O O","Scotch Game","Italian Game","Queens Pawn Opening Chigorin Variation 2...Nf6 3.Nf3","Kings Pawn Opening 1...E5","Sicilian Defense Smith Morra Gambit 2...Cxd4 3.Qxd4 Nc6","Center Game Accepted Paulsen Attack"]},"barmode":"group","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","font":{"color":"#adb5bd"},"legend":{"orientation":"h","y":-0.14999999999999999},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[33,19,17,16,15,13,13,13,12,11],"y":["Kings Pawn Opening 1...E5","Italian Game","Scotch Game","Giuoco Piano Game Four Knights Game 5.O O","Queens Pawn Opening Zukertort Chigorin Variation 3.Bf4 Nf6 4.E3","Kings Gambit Declined Queens Knight Defense 3.Nf3","Scotch Game 3...D6","Queens Pawn Opening Accelerated London System","Bishops Opening Berlin Defense","Italian Game Knight Attack Normal Variation 5.Exd5"],"orientation":"h","hovertemplate":["%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>"],"type":"bar","name":"Black","marker":{"color":"rgba(181,136,99,1)","line":{"color":"rgba(181,136,99,1)"}},"textfont":{"color":"rgba(181,136,99,1)"},"error_y":{"color":"rgba(181,136,99,1)"},"error_x":{"color":"rgba(181,136,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[72,46,28,15,15,14,13,11,10,10],"y":["Center Game Accepted Paulsen Attack","Sicilian Defense Smith Morra Gambit 2...Cxd4 3.Qxd4 Nc6","Queens Pawn Opening Chigorin Variation 2...Nf6 3.Nf3","Center Game","Vienna Game","Center Game Accepted 3.Qxd4","Queens Pawn Opening Chigorin Variation","Center Game Accepted Paulsen Berger Variation 5.Nc3","Queens Pawn Opening Chigorin Variation 2...E6","Queens Pawn Opening Chigorin Variation 2...Nf6 3.Nf3 Bf5"],"orientation":"h","hovertemplate":["%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>","%{y}<br>Games: %{x}<extra><\/extra>"],"type":"bar","name":"White","marker":{"color":"rgba(240,217,181,1)","line":{"color":"rgba(240,217,181,1)"}},"textfont":{"color":"rgba(240,217,181,1)"},"error_y":{"color":"rgba(240,217,181,1)"},"error_x":{"color":"rgba(240,217,181,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

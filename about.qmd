@@ -1,0 +1,67 @@
+---
+title: "About"
+subtitle: "Methodology and data collection"
+---
+
+```{r setup}
+source(here::here("R", "functions.R"))
+con <- get_site_db()
+stats <- get_db_stats(con)
+disconnect_db(con)
+```
+
+## Data Collection
+
+This site displays automated chess analytics for **`r SITE_USERNAME`** on **`r SITE_PLATFORM`**.
+
+Games are fetched daily via the Chess.com public API using a custom Python pipeline. Each game's PGN is parsed and every move is analyzed with **Stockfish** (depth 15–25) to compute per-move evaluations and centipawn loss.
+
+- **Total games in database:** `r stats$total_games`
+- **Fully analyzed games:** `r stats$analyzed_games`
+- **Total moves analyzed:** `r format(stats$total_moves, big.mark = ",")`
+- **Analysis runs daily** via a scheduled `launchd` job
+
+## Accuracy Formula
+
+Move accuracy is computed using the Chess.com approximation:
+
+$$
+\text{Accuracy} = 103.1668 \cdot e^{-0.04354 \cdot \text{cp\_loss}} - 3.1668
+$$
+
+where **cp_loss** is the centipawn loss for a given move (clamped to ≥ 0). The result is bounded to [0, 100].
+
+Game-level accuracy is the mean of all individual move accuracies within that game.
+
+## Move Classification Thresholds
+
+| Classification | Centipawn Loss |
+|---|---|
+| **Best** | 0 |
+| **Excellent** | 1–10 |
+| **Good** | 11–25 |
+| **Inaccuracy** | 26–50 |
+| **Mistake** | 51–100 |
+| **Blunder** | > 100 |
+
+## Game Phase Definitions
+
+Phases are assigned by Stockfish during analysis:
+
+| Phase | Heuristic |
+|---|---|
+| **Opening** | Moves within known book theory or early development (typically moves 1–~10) |
+| **Middlegame** | After opening development, pieces actively engaged |
+| **Endgame** | Reduced material; typically when fewer than 7 non-pawn pieces remain |
+
+## Technology Stack
+
+- **Data pipeline:** Python (python-chess, requests)
+- **Engine:** Stockfish
+- **Database:** SQLite
+- **Analytics:** R (tidyverse, plotly, DBI)
+- **Site:** Quarto → GitHub Pages
+
+---
+
+*Last updated: `r format(Sys.time(), "%B %d, %Y at %H:%M %Z")`*

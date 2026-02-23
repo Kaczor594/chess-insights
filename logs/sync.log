@@ -1,0 +1,440 @@
+2026-01-23 20:54:01 - Starting daily sync
+Fetching games since 2026-01-19T16:46:09
+⠸ Stored 2 games...
+Fetch complete!
+  Games stored: 2
+  Games skipped (already exist): 0
+2026-01-23 20:54:02 - Fetch completed successfully
+Found 2 games to analyze at depth 15
+Analyzing 2 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 2
+  Games failed: 0
+2026-01-23 20:54:17 - Daily sync completed
+---
+2026-01-24 03:09:29 - Starting daily sync
+Fetching games since 2026-01-23T10:58:16
+⠸ Fetching games for kaczor594...
+Fetch complete!
+  Games stored: 0
+  Games skipped (already exist): 0
+2026-01-24 03:09:37 - Fetch completed successfully
+Found 50 games to analyze at depth 15
+Error initializing Stockfish: 
+2026-01-24 03:09:48 - Daily sync completed
+---
+2026-01-25 03:00:04 - Starting daily sync
+Fetching games since 2026-01-23T10:58:16
+⠼ Fetching games for kaczor594...
+Fetch complete!
+  Games stored: 0
+  Games skipped (already exist): 0
+2026-01-25 03:00:06 - Fetch completed successfully
+No pending games to analyze.
+2026-01-25 03:00:06 - Daily sync completed
+---
+2026-01-26 03:34:15 - Starting daily sync
+Fetching games since 2026-01-23T10:58:16
+⠏ Stored 3 games...
+Fetch complete!
+  Games stored: 3
+  Games skipped (already exist): 0
+2026-01-26 03:34:18 - Fetch completed successfully
+Found 3 games to analyze at depth 15
+Analyzing 3 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 3
+  Games failed: 0
+2026-01-26 03:34:48 - Daily sync completed
+---
+2026-01-27 03:03:46 - Starting daily sync
+Fetching games since 2026-01-25T17:26:38
+⠹ Stored 8 games...
+Fetch complete!
+  Games stored: 8
+  Games skipped (already exist): 0
+2026-01-27 03:03:48 - Fetch completed successfully
+Found 8 games to analyze at depth 15
+Analyzing 8 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 8
+  Games failed: 0
+2026-01-27 03:20:03 - Daily sync completed
+---
+2026-01-28 03:03:26 - Starting daily sync
+Fetching games since 2026-01-26T22:58:17
+⠸ Stored 9 games...
+Fetch complete!
+  Games stored: 9
+  Games skipped (already exist): 0
+2026-01-28 03:03:28 - Fetch completed successfully
+Found 9 games to analyze at depth 15
+Analyzing 9 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 9
+  Games failed: 0
+2026-01-28 03:57:52 - Daily sync completed
+---
+2026-01-29 03:07:59 - Starting daily sync
+Fetching games since 2026-01-27T23:59:34
+⠧ Stored 2 games...
+Fetch complete!
+  Games stored: 2
+  Games skipped (already exist): 0
+2026-01-29 03:08:04 - Fetch completed successfully
+Found 2 games to analyze at depth 15
+Analyzing 2 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 2
+  Games failed: 0
+2026-01-29 03:54:39 - Daily sync completed
+---
+2026-01-30 03:00:05 - Starting daily sync
+Fetching games since 2026-01-28T21:47:38
+⠧ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-01-30 03:00:07 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-01-30 03:00:16 - Daily sync completed
+---
+2026-01-31 03:10:23 - Starting daily sync
+Fetching games since 2026-01-29T08:46:11
+⠧ Fetching games for kaczor594...
+Fetch complete!
+  Games stored: 0
+  Games skipped (already exist): 0
+2026-01-31 03:10:26 - Fetch completed successfully
+No pending games to analyze.
+2026-01-31 03:10:27 - Daily sync completed
+---
+2026-02-01 03:33:04 - Starting daily sync
+Fetching games since 2026-01-29T08:46:11
+⠇ Stored 8 games...
+Fetch complete!
+  Games stored: 8
+  Games skipped (already exist): 0
+2026-02-01 03:33:11 - Fetch completed successfully
+Found 8 games to analyze at depth 15
+Analyzing 8 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 8
+  Games failed: 0
+2026-02-01 08:18:13 - Daily sync completed
+---
+2026-02-02 03:38:14 - Starting daily sync
+Fetching games since 2026-01-31T21:50:37
+⠧ Fetching games for kaczor594...
+Fetch complete!
+  Games stored: 0
+  Games skipped (already exist): 0
+2026-02-02 03:38:18 - Fetch completed successfully
+No pending games to analyze.
+2026-02-02 03:38:18 - Daily sync completed
+---
+2026-02-03 03:31:42 - Starting daily sync
+Fetching games since 2026-01-31T21:50:37
+⠙ Stored 6 games...
+Fetch complete!
+  Games stored: 6
+  Games skipped (already exist): 0
+2026-02-03 03:31:46 - Fetch completed successfully
+Found 6 games to analyze at depth 15
+Analyzing 6 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 6
+  Games failed: 0
+2026-02-03 06:34:42 - Daily sync completed
+---
+2026-02-04 03:00:00 - Starting daily sync
+Fetching games since 2026-02-02T17:43:28
+⠸ Stored 7 games...
+Fetch complete!
+  Games stored: 7
+  Games skipped (already exist): 0
+2026-02-04 03:00:01 - Fetch completed successfully
+Found 7 games to analyze at depth 15
+Analyzing 7 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 7
+  Games failed: 0
+2026-02-04 03:00:21 - Daily sync completed
+---
+2026-02-05 03:00:05 - Starting daily sync
+Fetching games since 2026-02-03T23:55:30
+⠼ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-05 03:00:07 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-05 03:00:10 - Daily sync completed
+---
+2026-02-06 03:21:14 - Starting daily sync
+Fetching games since 2026-02-04T11:13:42
+⠙ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-06 03:21:20 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-06 03:21:37 - Daily sync completed
+---
+2026-02-07 03:37:55 - Starting daily sync
+Fetching games since 2026-02-05T13:27:40
+⠼ Stored 2 games...
+Fetch complete!
+  Games stored: 2
+  Games skipped (already exist): 0
+2026-02-07 03:37:58 - Fetch completed successfully
+Found 2 games to analyze at depth 15
+Analyzing 2 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 2
+  Games failed: 0
+2026-02-07 03:54:00 - Daily sync completed
+---
+2026-02-08 03:00:04 - Starting daily sync
+Fetching games since 2026-02-06T13:12:01
+⠼ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-08 03:00:06 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-08 03:00:10 - Daily sync completed
+---
+2026-02-09 03:02:19 - Starting daily sync
+Fetching games since 2026-02-07T21:32:04
+Error fetching games: HTTPSConnectionPool(host='api.chess.com', port=443): Max 
+retries exceeded with url: /pub/player/kaczor594/games/archives (Caused by 
+NameResolutionError("HTTPSConnection(host='api.chess.com', port=443): Failed to 
+resolve 'api.chess.com' ([Errno 8] nodename nor servname provided, or not 
+known)"))
+⠋ Fetching games for kaczor594...
+2026-02-09 03:02:20 - Fetch completed successfully
+No pending games to analyze.
+2026-02-09 03:02:20 - Daily sync completed
+---
+2026-02-10 03:26:18 - Starting daily sync
+Fetching games since 2026-02-07T21:32:04
+⠸ Fetching games for kaczor594...
+Fetch complete!
+  Games stored: 0
+  Games skipped (already exist): 0
+2026-02-10 03:26:28 - Fetch completed successfully
+No pending games to analyze.
+2026-02-10 03:26:28 - Daily sync completed
+---
+2026-02-11 03:31:08 - Starting daily sync
+Fetching games since 2026-02-07T21:32:04
+⠦ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-11 03:31:19 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-11 03:31:31 - Daily sync completed
+---
+2026-02-12 03:00:33 - Starting daily sync
+Fetching games since 2026-02-10T22:09:24
+Error fetching games: HTTPSConnectionPool(host='api.chess.com', port=443): Max 
+retries exceeded with url: /pub/player/kaczor594/games/archives (Caused by 
+NameResolutionError("HTTPSConnection(host='api.chess.com', port=443): Failed to 
+resolve 'api.chess.com' ([Errno 8] nodename nor servname provided, or not 
+known)"))
+⠋ Fetching games for kaczor594...
+2026-02-12 03:00:33 - Fetch completed successfully
+No pending games to analyze.
+2026-02-12 03:00:33 - Daily sync completed
+---
+2026-02-13 03:40:11 - Starting daily sync
+Fetching games since 2026-02-10T22:09:24
+⠇ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-13 03:40:13 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-13 03:47:21 - Daily sync completed
+---
+2026-02-14 03:48:54 - Starting daily sync
+Fetching games since 2026-02-12T17:35:57
+⠙ Fetching games for kaczor594...
+Fetch complete!
+  Games stored: 0
+  Games skipped (already exist): 0
+2026-02-14 03:48:58 - Fetch completed successfully
+No pending games to analyze.
+2026-02-14 03:48:58 - Daily sync completed
+---
+2026-02-15 03:00:04 - Starting daily sync
+Fetching games since 2026-02-12T17:35:57
+⠴ Fetching games for kaczor594...
+Fetch complete!
+  Games stored: 0
+  Games skipped (already exist): 0
+2026-02-15 03:00:06 - Fetch completed successfully
+No pending games to analyze.
+2026-02-15 03:00:06 - Daily sync completed
+---
+2026-02-16 03:00:00 - Starting daily sync
+Fetching games since 2026-02-12T17:35:57
+⠼ Stored 2 games...
+Fetch complete!
+  Games stored: 2
+  Games skipped (already exist): 0
+2026-02-16 03:00:02 - Fetch completed successfully
+Found 2 games to analyze at depth 15
+Analyzing 2 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 2
+  Games failed: 0
+2026-02-16 03:00:24 - Daily sync completed
+---
+2026-02-17 03:00:04 - Starting daily sync
+Fetching games since 2026-02-15T12:53:08
+⠹ Stored 10 games...
+Fetch complete!
+  Games stored: 10
+  Games skipped (already exist): 0
+2026-02-17 03:00:05 - Fetch completed successfully
+Found 10 games to analyze at depth 15
+Analyzing 10 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 10
+  Games failed: 0
+2026-02-17 03:00:34 - Daily sync completed
+---
+2026-02-18 03:00:01 - Starting daily sync
+Fetching games since 2026-02-17T00:55:12
+⠼ Stored 10 games...
+Fetch complete!
+  Games stored: 10
+  Games skipped (already exist): 0
+2026-02-18 03:00:03 - Fetch completed successfully
+Found 10 games to analyze at depth 15
+Analyzing 10 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 10
+  Games failed: 0
+2026-02-18 03:01:30 - Daily sync completed
+---
+2026-02-19 03:00:02 - Starting daily sync
+Fetching games since 2026-02-17T22:49:50
+⠸ Stored 3 games...
+Fetch complete!
+  Games stored: 3
+  Games skipped (already exist): 0
+2026-02-19 03:00:04 - Fetch completed successfully
+Found 3 games to analyze at depth 15
+Analyzing 3 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 3
+  Games failed: 0
+2026-02-19 03:00:32 - Daily sync completed
+---
+2026-02-20 03:07:37 - Starting daily sync
+Fetching games since 2026-02-18T15:46:13
+⠏ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-20 03:07:48 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-20 03:07:52 - Daily sync completed
+---
+2026-02-21 03:12:54 - Starting daily sync
+Fetching games since 2026-02-19T09:10:02
+⠏ Stored 12 games...
+Fetch complete!
+  Games stored: 12
+  Games skipped (already exist): 0
+2026-02-21 03:12:57 - Fetch completed successfully
+Found 12 games to analyze at depth 15
+Analyzing 12 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 12
+  Games failed: 0
+2026-02-21 03:14:28 - Daily sync completed
+---
+2026-02-22 03:47:37 - Starting daily sync
+Fetching games since 2026-02-20T21:16:33
+⠙ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-22 03:47:39 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-22 03:48:11 - Daily sync completed
+---
+2026-02-23 03:06:37 - Starting daily sync
+Fetching games since 2026-02-21T12:23:02
+⠧ Stored 7 games...
+Fetch complete!
+  Games stored: 7
+  Games skipped (already exist): 0
+2026-02-23 03:06:41 - Fetch completed successfully
+Found 7 games to analyze at depth 15
+Analyzing 7 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 7
+  Games failed: 0
+2026-02-23 03:37:55 - Daily sync completed
+---

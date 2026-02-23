@@ -1,0 +1,76 @@
+/* Chess Insights - Custom Styles */
+
+/* Chess board color palette */
+:root {
+  --chess-light: #f0d9b5;
+  --chess-dark: #b58863;
+  --chess-accent: #2E86AB;
+  --chess-bg-card: rgba(255, 255, 255, 0.05);
+  --chess-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Stat cards */
+.stat-card {
+  background: var(--chess-bg-card);
+  border: 1px solid var(--chess-border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.stat-card .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--chess-light);
+  line-height: 1.2;
+}
+
+.stat-card .stat-label {
+  font-size: 0.85rem;
+  color: #adb5bd;
+  margin-top: 0.25rem;
+}
+
+/* Section headers */
+h2 {
+  border-bottom: 2px solid var(--chess-dark);
+  padding-bottom: 0.4rem;
+  margin-top: 2rem;
+}
+
+/* Plot containers */
+.cell-output-display {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table styling overrides for DT */
+.dataTables_wrapper {
+  font-size: 0.9rem;
+}
+
+table.dataTable thead th {
+  background-color: var(--chess-dark) !important;
+  color: white !important;
+}
+
+table.dataTable tbody tr:hover {
+  background-color: rgba(240, 217, 181, 0.1) !important;
+}
+
+/* Navbar accent */
+.navbar {
+  border-bottom: 3px solid var(--chess-dark) !important;
+}
+
+/* Value boxes row */
+.grid .g-col-3, .grid .g-col-4, .grid .g-col-6 {
+  display: flex;
+}
+
+.grid .g-col-3 .stat-card,
+.grid .g-col-4 .stat-card,
+.grid .g-col-6 .stat-card {
+  width: 100%;
+}

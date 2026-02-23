@@ -1,0 +1,154 @@
+---
+title: "Game Phase Analysis"
+subtitle: "Opening, middlegame, and endgame performance"
+---
+
+```{r setup}
+source(here::here("R", "functions.R"))
+con <- get_site_db()
+player_moves <- load_site_player_moves(con)
+my_moves <- player_moves %>% filter(is_player_move)
+```
+
+## Phase Accuracy Overview
+
+```{r phase-overview}
+phase_acc <- calculate_phase_accuracy(my_moves)
+
+phase_summary <- phase_acc %>%
+  group_by(game_phase) %>%
+  summarise(
+    mean_accuracy = mean(accuracy, na.rm = TRUE),
+    sd_accuracy = sd(accuracy, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+
+plot_ly(phase_summary, x = ~game_phase, y = ~mean_accuracy, type = "bar",
+        marker = list(color = c("#2E86AB", "#f0d9b5", "#b58863")),
+        error_y = list(array = ~sd_accuracy, color = "#adb5bd"),
+        text = ~sprintf("%.1f%%", mean_accuracy),
+        textposition = "outside",
+        hovertemplate = "%{x}<br>Accuracy: %{y:.1f}% ± %{error_y.array:.1f}%<extra></extra>") %>%
+  layout(
+    title = list(text = "Average Accuracy by Game Phase", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Game Phase", gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Accuracy (%)", range = c(0, 105), gridcolor = "rgba(255,255,255,0.1)"),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+## Phase Accuracy Over Time
+
+```{r phase-trend}
+phase_trend <- my_moves %>%
+  filter(!is.na(centipawn_loss), !is.na(game_phase)) %>%
+  group_by(game_id, date_played, game_phase) %>%
+  summarise(
+    accuracy = calculate_accuracy(mean(centipawn_loss, na.rm = TRUE)),
+    .groups = "drop"
+  ) %>%
+  arrange(date_played) %>%
+  group_by(game_phase) %>%
+  mutate(
+    game_num = row_number(),
+    rolling_accuracy = slider::slide_dbl(accuracy, mean, .before = 9, .complete = FALSE)
+  ) %>%
+  ungroup()
+
+phase_colors <- c("opening" = "#2E86AB", "middlegame" = "#f0d9b5", "endgame" = "#b58863")
+
+p <- plot_ly()
+for (phase in names(phase_colors)) {
+  d <- phase_trend %>% filter(game_phase == phase)
+  p <- p %>% add_trace(data = d, x = ~game_num, y = ~rolling_accuracy,
+                        type = "scatter", mode = "lines",
+                        name = str_to_title(phase),
+                        line = list(color = phase_colors[phase], width = 2),
+                        hovertemplate = paste0(str_to_title(phase),
+                                               "<br>Game %{x}<br>Accuracy: %{y:.1f}%<extra></extra>"))
+}
+
+p %>% layout(
+  title = list(text = "Rolling Phase Accuracy (10-game window)", font = list(color = "#f0d9b5")),
+  xaxis = list(title = "Game Number", gridcolor = "rgba(255,255,255,0.1)"),
+  yaxis = list(title = "Accuracy (%)", range = c(0, 100), gridcolor = "rgba(255,255,255,0.1)"),
+  paper_bgcolor = "rgba(0,0,0,0)",
+  plot_bgcolor = "rgba(0,0,0,0)",
+  font = list(color = "#adb5bd"),
+  legend = list(orientation = "h", y = -0.15)
+)
+```
+
+## Move Quality by Phase
+
+```{r move-quality-phase}
+phase_dist <- my_moves %>%
+  filter(!is.na(centipawn_loss), !is.na(game_phase)) %>%
+  mutate(move_quality = classify_move(centipawn_loss)) %>%
+  count(game_phase, move_quality) %>%
+  group_by(game_phase) %>%
+  mutate(pct = n / sum(n) * 100) %>%
+  ungroup()
+
+move_colors <- c(
+  "Best" = "#4CAF50", "Excellent" = "#8BC34A", "Good" = "#CDDC39",
+  "Inaccuracy" = "#FFC107", "Mistake" = "#FF9800", "Blunder" = "#F44336", "Unknown" = "#9E9E9E"
+)
+
+p <- ggplot(phase_dist, aes(x = game_phase, y = pct, fill = move_quality)) +
+  geom_col(position = "stack") +
+  scale_fill_manual(values = move_colors) +
+  labs(
+    title = "Move Quality Distribution by Game Phase",
+    x = "Game Phase",
+    y = "Percentage (%)",
+    fill = "Quality"
+  )
+
+ggplotly(p) %>%
+  layout(
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd"),
+    legend = list(orientation = "h", y = -0.2)
+  )
+```
+
+## Critical Moments
+
+```{r critical-moments}
+library(DT)
+
+critical <- identify_critical_moments(my_moves, min_cp_loss = 100)
+
+if (nrow(critical) > 0) {
+  critical %>%
+    head(50) %>%
+    mutate(
+      centipawn_loss = round(centipawn_loss),
+      eval_before = round(eval_before),
+      eval_after = round(eval_after)
+    ) %>%
+    select(
+      Phase = game_phase, Ply = ply_number, Color = color,
+      Move = san, `CP Loss` = centipawn_loss,
+      `Eval Before` = eval_before, `Eval After` = eval_after,
+      `Best Move` = best_move
+    ) %>%
+    datatable(
+      options = list(pageLength = 15, order = list(list(4, "desc"))),
+      rownames = FALSE,
+      class = "compact stripe",
+      caption = "Top 50 critical moments (centipawn loss ≥ 100)"
+    )
+} else {
+  cat("No critical moments found with centipawn loss ≥ 100.")
+}
+```
+
+```{r cleanup}
+disconnect_db(con)
+```

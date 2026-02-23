@@ -1,0 +1,140 @@
+---
+title: "Time Management"
+subtitle: "How does the clock affect your play?"
+---
+
+```{r setup}
+source(here::here("R", "functions.R"))
+con <- get_site_db()
+player_moves <- load_site_player_moves(con)
+my_moves <- player_moves %>% filter(is_player_move)
+```
+
+## Accuracy by Time Remaining
+
+```{r time-accuracy}
+time_acc <- calculate_time_accuracy(my_moves)
+plot_time_accuracy_interactive(time_acc) %>%
+  layout(
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+## Average Time Spent per Move
+
+```{r time-per-move}
+time_by_move <- my_moves %>%
+  filter(!is.na(clock_time_remaining)) %>%
+  arrange(game_id, ply_number) %>%
+  group_by(game_id) %>%
+  mutate(
+    time_spent = lag(clock_time_remaining) - clock_time_remaining,
+    move_number = ceiling(ply_number / 2)
+  ) %>%
+  ungroup() %>%
+  filter(!is.na(time_spent), time_spent >= 0, move_number <= 60) %>%
+  group_by(move_number) %>%
+  summarise(
+    avg_time = mean(time_spent, na.rm = TRUE),
+    median_time = median(time_spent, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+
+plot_ly(time_by_move, x = ~move_number) %>%
+  add_trace(y = ~avg_time, type = "scatter", mode = "lines",
+            name = "Mean", line = list(color = "#f0d9b5", width = 2),
+            hovertemplate = "Move %{x}<br>Avg: %{y:.1f}s<extra></extra>") %>%
+  add_trace(y = ~median_time, type = "scatter", mode = "lines",
+            name = "Median", line = list(color = "#b58863", width = 2, dash = "dot"),
+            hovertemplate = "Move %{x}<br>Median: %{y:.1f}s<extra></extra>") %>%
+  layout(
+    title = list(text = "Time Spent per Move", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Move Number", gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Seconds", gridcolor = "rgba(255,255,255,0.1)"),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd"),
+    legend = list(orientation = "h", y = -0.15)
+  )
+```
+
+## Time Pressure Frequency
+
+```{r time-pressure}
+pressure_thresholds <- c(10, 30, 60)
+
+pressure_freq <- my_moves %>%
+  filter(!is.na(clock_time_remaining)) %>%
+  group_by(game_id) %>%
+  summarise(
+    min_time = min(clock_time_remaining),
+    .groups = "drop"
+  )
+
+pressure_stats <- tibble(
+  threshold = paste0("< ", pressure_thresholds, "s"),
+  seconds = pressure_thresholds,
+  games_affected = map_int(pressure_thresholds, ~ sum(pressure_freq$min_time < .x)),
+  total_games = nrow(pressure_freq)
+) %>%
+  mutate(pct = games_affected / total_games * 100)
+
+plot_ly(pressure_stats, x = ~threshold, y = ~pct, type = "bar",
+        marker = list(color = c("#F44336", "#FF9800", "#FFC107")),
+        text = ~sprintf("%.0f%% (%d games)", pct, games_affected),
+        textposition = "outside",
+        hovertemplate = "%{x}<br>%{text}<extra></extra>") %>%
+  layout(
+    title = list(text = "How Often Does the Clock Get Low?", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Time Threshold", gridcolor = "rgba(255,255,255,0.1)",
+                 categoryorder = "array", categoryarray = paste0("< ", pressure_thresholds, "s")),
+    yaxis = list(title = "% of Games", gridcolor = "rgba(255,255,255,0.1)"),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+## Accuracy by Time Control Category
+
+```{r accuracy-by-tc}
+tc_accuracy <- my_moves %>%
+  filter(!is.na(centipawn_loss), !is.na(time_control_seconds)) %>%
+  mutate(tc_category = classify_time_control(time_control_seconds)) %>%
+  group_by(game_id, tc_category) %>%
+  summarise(
+    accuracy = calculate_accuracy(mean(centipawn_loss, na.rm = TRUE)),
+    .groups = "drop"
+  )
+
+tc_category_order <- c("Bullet", "Blitz", "Rapid", "Classical")
+tc_colors <- c("Bullet" = "#F44336", "Blitz" = "#FF9800", "Rapid" = "#4CAF50", "Classical" = "#2E86AB")
+
+p <- tc_accuracy %>%
+  mutate(tc_category = factor(tc_category, levels = tc_category_order)) %>%
+  ggplot(aes(x = tc_category, y = accuracy, fill = tc_category)) +
+  geom_violin(alpha = 0.7, scale = "width") +
+  geom_boxplot(width = 0.15, fill = "white", alpha = 0.8, outlier.shape = NA) +
+  scale_fill_manual(values = tc_colors) +
+  labs(
+    title = "Accuracy Distribution by Time Control",
+    x = "Time Control",
+    y = "Accuracy (%)"
+  ) +
+  theme(legend.position = "none") +
+  coord_cartesian(ylim = c(0, 100))
+
+ggplotly(p) %>%
+  layout(
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+```{r cleanup}
+disconnect_db(con)
+```

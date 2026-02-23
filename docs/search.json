@@ -1,0 +1,163 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site displays automated chess analytics for kaczor594 on chesscom.\nGames are fetched daily via the Chess.com public API using a custom Python pipeline. Each game’s PGN is parsed and every move is analyzed with Stockfish (depth 15–25) to compute per-move evaluations and centipawn loss.\n\nTotal games in database: 5426\nFully analyzed games: 5417\nTotal moves analyzed: 361,543\nAnalysis runs daily via a scheduled launchd job"
+  },
+  {
+    "objectID": "about.html#data-collection",
+    "href": "about.html#data-collection",
+    "title": "About",
+    "section": "",
+    "text": "This site displays automated chess analytics for kaczor594 on chesscom.\nGames are fetched daily via the Chess.com public API using a custom Python pipeline. Each game’s PGN is parsed and every move is analyzed with Stockfish (depth 15–25) to compute per-move evaluations and centipawn loss.\n\nTotal games in database: 5426\nFully analyzed games: 5417\nTotal moves analyzed: 361,543\nAnalysis runs daily via a scheduled launchd job"
+  },
+  {
+    "objectID": "about.html#accuracy-formula",
+    "href": "about.html#accuracy-formula",
+    "title": "About",
+    "section": "Accuracy Formula",
+    "text": "Accuracy Formula\nMove accuracy is computed using the Chess.com approximation:\n\\[\n\\text{Accuracy} = 103.1668 \\cdot e^{-0.04354 \\cdot \\text{cp\\_loss}} - 3.1668\n\\]\nwhere cp_loss is the centipawn loss for a given move (clamped to ≥ 0). The result is bounded to [0, 100].\nGame-level accuracy is the mean of all individual move accuracies within that game."
+  },
+  {
+    "objectID": "about.html#move-classification-thresholds",
+    "href": "about.html#move-classification-thresholds",
+    "title": "About",
+    "section": "Move Classification Thresholds",
+    "text": "Move Classification Thresholds\n\n\n\nClassification\nCentipawn Loss\n\n\n\n\nBest\n0\n\n\nExcellent\n1–10\n\n\nGood\n11–25\n\n\nInaccuracy\n26–50\n\n\nMistake\n51–100\n\n\nBlunder\n&gt; 100"
+  },
+  {
+    "objectID": "about.html#game-phase-definitions",
+    "href": "about.html#game-phase-definitions",
+    "title": "About",
+    "section": "Game Phase Definitions",
+    "text": "Game Phase Definitions\nPhases are assigned by Stockfish during analysis:\n\n\n\n\n\n\n\nPhase\nHeuristic\n\n\n\n\nOpening\nMoves within known book theory or early development (typically moves 1–~10)\n\n\nMiddlegame\nAfter opening development, pieces actively engaged\n\n\nEndgame\nReduced material; typically when fewer than 7 non-pawn pieces remain"
+  },
+  {
+    "objectID": "about.html#technology-stack",
+    "href": "about.html#technology-stack",
+    "title": "About",
+    "section": "Technology Stack",
+    "text": "Technology Stack\n\nData pipeline: Python (python-chess, requests)\nEngine: Stockfish\nDatabase: SQLite\nAnalytics: R (tidyverse, plotly, DBI)\nSite: Quarto → GitHub Pages\n\n\nLast updated: February 23, 2026 at 23:44 CET"
+  },
+  {
+    "objectID": "phases.html#phase-accuracy-over-time",
+    "href": "phases.html#phase-accuracy-over-time",
+    "title": "Game Phase Analysis",
+    "section": "Phase Accuracy Over Time",
+    "text": "Phase Accuracy Over Time"
+  },
+  {
+    "objectID": "phases.html#move-quality-by-phase",
+    "href": "phases.html#move-quality-by-phase",
+    "title": "Game Phase Analysis",
+    "section": "Move Quality by Phase",
+    "text": "Move Quality by Phase"
+  },
+  {
+    "objectID": "phases.html#critical-moments",
+    "href": "phases.html#critical-moments",
+    "title": "Game Phase Analysis",
+    "section": "Critical Moments",
+    "text": "Critical Moments"
+  },
+  {
+    "objectID": "accuracy.html#accuracy-by-time-control",
+    "href": "accuracy.html#accuracy-by-time-control",
+    "title": "Accuracy Trends",
+    "section": "Accuracy by Time Control",
+    "text": "Accuracy by Time Control"
+  },
+  {
+    "objectID": "accuracy.html#accuracy-distribution",
+    "href": "accuracy.html#accuracy-distribution",
+    "title": "Accuracy Trends",
+    "section": "Accuracy Distribution",
+    "text": "Accuracy Distribution"
+  },
+  {
+    "objectID": "accuracy.html#rating-vs-accuracy",
+    "href": "accuracy.html#rating-vs-accuracy",
+    "title": "Accuracy Trends",
+    "section": "Rating vs Accuracy",
+    "text": "Rating vs Accuracy"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Chess Insights Dashboard",
+    "section": "",
+    "text": "5417\nAnalyzed Games\n\n\n\n\n50.2%\nAvg Accuracy\n\n\n\n\nFeb 2015 — Feb 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Chess Insights Dashboard",
+    "section": "",
+    "text": "5417\nAnalyzed Games\n\n\n\n\n50.2%\nAvg Accuracy\n\n\n\n\nFeb 2015 — Feb 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
+  },
+  {
+    "objectID": "index.html#recent-performance",
+    "href": "index.html#recent-performance",
+    "title": "Chess Insights Dashboard",
+    "section": "Recent Performance",
+    "text": "Recent Performance"
+  },
+  {
+    "objectID": "index.html#move-quality-distribution",
+    "href": "index.html#move-quality-distribution",
+    "title": "Chess Insights Dashboard",
+    "section": "Move Quality Distribution",
+    "text": "Move Quality Distribution"
+  },
+  {
+    "objectID": "index.html#rating-vs-accuracy",
+    "href": "index.html#rating-vs-accuracy",
+    "title": "Chess Insights Dashboard",
+    "section": "Rating vs Accuracy",
+    "text": "Rating vs Accuracy"
+  },
+  {
+    "objectID": "openings.html#opening-accuracy-chart",
+    "href": "openings.html#opening-accuracy-chart",
+    "title": "Opening Performance",
+    "section": "Opening Accuracy Chart",
+    "text": "Opening Accuracy Chart"
+  },
+  {
+    "objectID": "openings.html#win-rate-by-opening",
+    "href": "openings.html#win-rate-by-opening",
+    "title": "Opening Performance",
+    "section": "Win Rate by Opening",
+    "text": "Win Rate by Opening"
+  },
+  {
+    "objectID": "openings.html#repertoire-white-vs-black",
+    "href": "openings.html#repertoire-white-vs-black",
+    "title": "Opening Performance",
+    "section": "Repertoire — White vs Black",
+    "text": "Repertoire — White vs Black"
+  },
+  {
+    "objectID": "time-management.html#average-time-spent-per-move",
+    "href": "time-management.html#average-time-spent-per-move",
+    "title": "Time Management",
+    "section": "Average Time Spent per Move",
+    "text": "Average Time Spent per Move"
+  },
+  {
+    "objectID": "time-management.html#time-pressure-frequency",
+    "href": "time-management.html#time-pressure-frequency",
+    "title": "Time Management",
+    "section": "Time Pressure Frequency",
+    "text": "Time Pressure Frequency"
+  },
+  {
+    "objectID": "time-management.html#accuracy-by-time-control-category",
+    "href": "time-management.html#accuracy-by-time-control-category",
+    "title": "Time Management",
+    "section": "Accuracy by Time Control Category",
+    "text": "Accuracy by Time Control Category"
+  }
+]

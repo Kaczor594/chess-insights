@@ -1,0 +1,116 @@
+---
+title: "Chess Insights Dashboard"
+subtitle: "Automated chess analytics for kaczor594"
+---
+
+```{r setup}
+source(here::here("R", "functions.R"))
+con <- get_site_db()
+player_moves <- load_site_player_moves(con)
+games <- load_site_games(con)
+stats <- get_db_stats(con)
+```
+
+## Overview
+
+::: {.grid}
+
+::: {.g-col-3}
+::: {.stat-card}
+[`r stats$analyzed_games`]{.stat-value}
+
+[Analyzed Games]{.stat-label}
+:::
+:::
+
+::: {.g-col-3}
+::: {.stat-card}
+[`r sprintf("%.1f%%", mean(calculate_accuracy(player_moves$centipawn_loss[player_moves$is_player_move & !is.na(player_moves$centipawn_loss)])))`]{.stat-value}
+
+[Avg Accuracy]{.stat-label}
+:::
+:::
+
+::: {.g-col-3}
+::: {.stat-card}
+[`r format(min(games$date_played, na.rm = TRUE), "%b %Y")` — `r format(max(games$date_played, na.rm = TRUE), "%b %Y")`]{.stat-value .stat-value-small style="font-size: 1.2rem;"}
+
+[Date Range]{.stat-label}
+:::
+:::
+
+::: {.g-col-3}
+::: {.stat-card}
+[`r games %>% count(time_control) %>% slice_max(n, n = 1) %>% pull(time_control)`]{.stat-value .stat-value-small style="font-size: 1.2rem;"}
+
+[Most Played]{.stat-label}
+:::
+:::
+
+:::
+
+## Recent Performance
+
+```{r recent-performance}
+acc_trend <- calculate_accuracy_trend(player_moves, window_size = 10)
+
+last_20 <- acc_trend %>% tail(20)
+
+plot_ly(last_20, x = ~game_num, y = ~accuracy, type = "scatter", mode = "markers+lines",
+        marker = list(size = 8, color = "#f0d9b5"),
+        line = list(color = "#2E86AB"),
+        hovertemplate = "Game %{x}<br>Accuracy: %{y:.1f}%<extra></extra>") %>%
+  add_trace(y = ~rolling_accuracy, mode = "lines",
+            line = list(color = "#b58863", width = 3, dash = "dot"),
+            name = "Rolling Avg",
+            hovertemplate = "Rolling Avg: %{y:.1f}%<extra></extra>") %>%
+  layout(
+    title = list(text = "Last 20 Games — Accuracy", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Game Number", gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Accuracy (%)", range = c(0, 100), gridcolor = "rgba(255,255,255,0.1)"),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd"),
+    showlegend = FALSE
+  )
+```
+
+## Move Quality Distribution
+
+```{r move-quality}
+move_dist <- calculate_move_distribution(player_moves %>% filter(is_player_move))
+
+move_colors <- c(
+  "Best" = "#4CAF50", "Excellent" = "#8BC34A", "Good" = "#CDDC39",
+  "Inaccuracy" = "#FFC107", "Mistake" = "#FF9800", "Blunder" = "#F44336", "Unknown" = "#9E9E9E"
+)
+
+plot_ly(move_dist, labels = ~move_quality, values = ~n, type = "pie",
+        hole = 0.5,
+        marker = list(colors = move_colors[move_dist$move_quality]),
+        textinfo = "label+percent",
+        hovertemplate = "%{label}: %{value} moves (%{percent})<extra></extra>") %>%
+  layout(
+    title = list(text = "Move Quality Breakdown", font = list(color = "#f0d9b5")),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd"),
+    showlegend = FALSE
+  )
+```
+
+## Rating vs Accuracy
+
+```{r rating-accuracy}
+p <- plot_rating_accuracy(acc_trend)
+ggplotly(p) %>%
+  layout(
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    font = list(color = "#adb5bd")
+  )
+```
+
+```{r cleanup}
+disconnect_db(con)
+```

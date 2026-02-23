@@ -1,0 +1,42 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - accuracy.qmd
+    - openings.qmd
+    - phases.qmd
+    - time-management.qmd
+    - about.qmd
+
+website:
+  title: "Chess Insights"
+  navbar:
+    background: dark
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: accuracy.qmd
+        text: Accuracy
+      - href: openings.qmd
+        text: Openings
+      - href: phases.qmd
+        text: Game Phases
+      - href: time-management.qmd
+        text: Time Management
+      - href: about.qmd
+        text: About
+
+format:
+  html:
+    theme: darkly
+    css: styles.css
+    code-fold: true
+    code-summary: "Show code"
+    toc: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: false
