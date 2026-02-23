@@ -48,15 +48,65 @@ h2 {
 /* Table styling overrides for DT */
 .dataTables_wrapper {
   font-size: 0.9rem;
+  color: #dee2e6 !important;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+  color: #adb5bd !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #dee2e6 !important;
+}
+
+.dataTables_wrapper .dataTables_length select {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #dee2e6 !important;
 }
 
 table.dataTable thead th {
   background-color: var(--chess-dark) !important;
   color: white !important;
+  border-bottom: 2px solid var(--chess-light) !important;
+}
+
+table.dataTable tbody td {
+  color: #dee2e6 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 table.dataTable tbody tr:hover {
   background-color: rgba(240, 217, 181, 0.1) !important;
+}
+
+table.dataTable tbody tr:hover td {
+  color: #fff !important;
+}
+
+table.dataTable caption {
+  color: #adb5bd !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: #adb5bd !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: var(--chess-dark) !important;
+  color: white !important;
+  border-color: var(--chess-dark) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: rgba(240, 217, 181, 0.2) !important;
+  color: white !important;
+  border-color: transparent !important;
 }
 
 /* Navbar accent */

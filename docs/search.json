@@ -39,7 +39,7 @@
     "href": "about.html#technology-stack",
     "title": "About",
     "section": "Technology Stack",
-    "text": "Technology Stack\n\nData pipeline: Python (python-chess, requests)\nEngine: Stockfish\nDatabase: SQLite\nAnalytics: R (tidyverse, plotly, DBI)\nSite: Quarto → GitHub Pages\n\n\nLast updated: February 24, 2026 at 00:04 CET"
+    "text": "Technology Stack\n\nData pipeline: Python (python-chess, requests)\nEngine: Stockfish\nDatabase: SQLite\nAnalytics: R (tidyverse, plotly, DBI)\nSite: Quarto → GitHub Pages\n\n\nLast updated: February 24, 2026 at 00:10 CET"
   },
   {
     "objectID": "phases.html#phase-accuracy-over-time",
