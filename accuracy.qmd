@@ -15,13 +15,16 @@ games <- load_site_games(con)
 ```{r accuracy-trend}
 acc_trend <- calculate_accuracy_trend(player_moves, window_size = 10)
 
-p <- plot_accuracy_trend(acc_trend)
-ggplotly(p) %>%
-  layout(
-    paper_bgcolor = "rgba(0,0,0,0)",
-    plot_bgcolor = "rgba(0,0,0,0)",
-    font = list(color = "#adb5bd")
-  )
+p <- acc_trend %>%
+  ggplot(aes(x = game_num)) +
+  geom_point(aes(y = accuracy), alpha = 0.3, size = 1, color = "#f0d9b5") +
+  geom_line(aes(y = rolling_accuracy), color = "#2E86AB", linewidth = 1) +
+  labs(title = "Accuracy Trend Over Time",
+       subtitle = "Individual game accuracy (points) with rolling average (line)",
+       x = "Game Number", y = "Accuracy (%)") +
+  coord_cartesian(ylim = c(0, 100))
+
+ggplotly(p) %>% dark_plotly()
 ```
 
 ## Accuracy by Time Control
@@ -65,25 +68,33 @@ plot_ly(tc_accuracy, x = ~tc_category, y = ~mean_accuracy, type = "bar",
 ```{r accuracy-dist}
 game_accuracy <- calculate_game_accuracy(player_moves %>% filter(is_player_move))
 
-p <- plot_accuracy_distribution(game_accuracy)
-ggplotly(p) %>%
-  layout(
-    paper_bgcolor = "rgba(0,0,0,0)",
-    plot_bgcolor = "rgba(0,0,0,0)",
-    font = list(color = "#adb5bd")
-  )
+p <- game_accuracy %>%
+  pivot_longer(cols = c(white_accuracy, black_accuracy), names_to = "color", values_to = "accuracy") %>%
+  mutate(color = str_remove(color, "_accuracy") %>% str_to_title()) %>%
+  ggplot(aes(x = accuracy, fill = color)) +
+  geom_histogram(bins = 30, alpha = 0.7, position = "identity", color = NA) +
+  scale_fill_manual(values = c("White" = "#f0d9b5", "Black" = "#b58863")) +
+  labs(title = "Game Accuracy Distribution",
+       subtitle = "Distribution of average accuracy per game by color",
+       x = "Accuracy (%)", y = "Number of Games", fill = "Color") +
+  theme(legend.position = "top")
+
+ggplotly(p) %>% dark_plotly()
 ```
 
 ## Rating vs Accuracy
 
 ```{r rating-accuracy}
-p <- plot_rating_accuracy(acc_trend)
-ggplotly(p) %>%
-  layout(
-    paper_bgcolor = "rgba(0,0,0,0)",
-    plot_bgcolor = "rgba(0,0,0,0)",
-    font = list(color = "#adb5bd")
-  )
+p <- acc_trend %>%
+  filter(!is.na(player_rating)) %>%
+  ggplot(aes(x = player_rating, y = accuracy)) +
+  geom_point(alpha = 0.5, color = "#f0d9b5") +
+  geom_smooth(method = "lm", color = "#2E86AB") +
+  labs(title = "Rating vs Accuracy", subtitle = "Correlation between player rating and game accuracy",
+       x = "Player Rating", y = "Accuracy (%)") +
+  coord_cartesian(ylim = c(0, 100))
+
+ggplotly(p) %>% dark_plotly()
 ```
 
 ```{r cleanup}

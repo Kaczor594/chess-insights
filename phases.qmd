@@ -109,12 +109,8 @@ p <- ggplot(phase_dist, aes(x = game_phase, y = pct, fill = move_quality)) +
   )
 
 ggplotly(p) %>%
-  layout(
-    paper_bgcolor = "rgba(0,0,0,0)",
-    plot_bgcolor = "rgba(0,0,0,0)",
-    font = list(color = "#adb5bd"),
-    legend = list(orientation = "h", y = -0.2)
-  )
+  dark_plotly() %>%
+  layout(legend = list(orientation = "h", y = -0.2))
 ```
 
 ## Critical Moments

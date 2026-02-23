@@ -14,8 +14,20 @@ my_moves <- player_moves %>% filter(is_player_move)
 
 ```{r time-accuracy}
 time_acc <- calculate_time_accuracy(my_moves)
-plot_time_accuracy_interactive(time_acc) %>%
+
+plot_ly(time_acc, x = ~time_category, y = ~accuracy, type = "bar",
+        marker = list(color = ~accuracy,
+                      colorscale = list(c(0, "#F44336"), c(0.5, "#FFC107"), c(1, "#4CAF50")),
+                      cmin = 0, cmax = 100),
+        text = ~sprintf("%.1f%%", accuracy),
+        textposition = "outside",
+        textfont = list(color = "#f0d9b5"),
+        hovertemplate = "%{x}<br>Accuracy: %{y:.1f}%<br>Moves: %{customdata}<extra></extra>",
+        customdata = ~n_moves) %>%
   layout(
+    title = list(text = "Accuracy by Time Remaining", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Time Remaining", gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Accuracy (%)", range = c(0, 105), gridcolor = "rgba(255,255,255,0.1)"),
     paper_bgcolor = "rgba(0,0,0,0)",
     plot_bgcolor = "rgba(0,0,0,0)",
     font = list(color = "#adb5bd")
@@ -117,7 +129,7 @@ p <- tc_accuracy %>%
   mutate(tc_category = factor(tc_category, levels = tc_category_order)) %>%
   ggplot(aes(x = tc_category, y = accuracy, fill = tc_category)) +
   geom_violin(alpha = 0.7, scale = "width") +
-  geom_boxplot(width = 0.15, fill = "white", alpha = 0.8, outlier.shape = NA) +
+  geom_boxplot(width = 0.15, fill = "#adb5bd", alpha = 0.6, outlier.shape = NA, color = "#f0d9b5") +
   scale_fill_manual(values = tc_colors) +
   labs(
     title = "Accuracy Distribution by Time Control",
@@ -127,12 +139,7 @@ p <- tc_accuracy %>%
   theme(legend.position = "none") +
   coord_cartesian(ylim = c(0, 100))
 
-ggplotly(p) %>%
-  layout(
-    paper_bgcolor = "rgba(0,0,0,0)",
-    plot_bgcolor = "rgba(0,0,0,0)",
-    font = list(color = "#adb5bd")
-  )
+ggplotly(p) %>% dark_plotly()
 ```
 
 ```{r cleanup}
