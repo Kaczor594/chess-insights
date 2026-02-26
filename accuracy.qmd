@@ -1,6 +1,6 @@
 ---
-title: "Accuracy Trends"
-subtitle: "How accurate is your play over time?"
+title: "Centipawn Loss Trends"
+subtitle: "How clean is your play over time?"
 ---
 
 ```{r setup}
@@ -10,89 +10,89 @@ player_moves <- load_site_player_moves(con)
 games <- load_site_games(con)
 ```
 
-## Overall Accuracy Trend
+## Overall ACPL Trend
 
-```{r accuracy-trend}
+```{r acpl-trend}
 acc_trend <- calculate_accuracy_trend(player_moves, window_size = 10)
 
 p <- acc_trend %>%
   ggplot(aes(x = game_num)) +
   geom_point(aes(y = accuracy), alpha = 0.3, size = 1, color = "#f0d9b5") +
   geom_line(aes(y = rolling_accuracy), color = "#2E86AB", linewidth = 1) +
-  labs(title = "Accuracy Trend Over Time",
-       subtitle = "Individual game accuracy (points) with rolling average (line)",
-       x = "Game Number", y = "Accuracy (%)") +
-  coord_cartesian(ylim = c(0, 100))
+  labs(title = "Avg Centipawn Loss Over Time",
+       subtitle = "Per-game ACPL (points) with 10-game rolling average (line) — lower is better",
+       x = "Game Number", y = "Avg Centipawn Loss")
 
 ggplotly(p) %>% dark_plotly()
 ```
 
-## Accuracy by Time Control
+## ACPL by Time Control
 
-```{r accuracy-by-tc}
-tc_accuracy <- player_moves %>%
+```{r acpl-by-tc}
+tc_acpl <- player_moves %>%
   filter(is_player_move, !is.na(centipawn_loss), !is.na(time_control_seconds)) %>%
   mutate(tc_category = classify_time_control(time_control_seconds)) %>%
   group_by(game_id, tc_category) %>%
   summarise(
-    accuracy = calculate_accuracy(mean(centipawn_loss, na.rm = TRUE)),
+    acpl = mean(centipawn_loss, na.rm = TRUE),
     .groups = "drop"
   ) %>%
   group_by(tc_category) %>%
   summarise(
-    mean_accuracy = mean(accuracy, na.rm = TRUE),
-    sd_accuracy = sd(accuracy, na.rm = TRUE),
+    mean_acpl = mean(acpl, na.rm = TRUE),
+    sd_acpl = sd(acpl, na.rm = TRUE),
     n_games = n(),
     .groups = "drop"
   ) %>%
   filter(n_games >= 2)
 
-plot_ly(tc_accuracy, x = ~tc_category, y = ~mean_accuracy, type = "bar",
+plot_ly(tc_acpl, x = ~tc_category, y = ~mean_acpl, type = "bar",
         marker = list(color = c("Bullet" = "#F44336", "Blitz" = "#FF9800",
-                                "Rapid" = "#4CAF50", "Classical" = "#2E86AB")[tc_accuracy$tc_category]),
-        error_y = list(array = ~sd_accuracy, color = "#adb5bd"),
-        hovertemplate = "%{x}<br>Accuracy: %{y:.1f}%<br>Games: %{customdata}<extra></extra>",
+                                "Rapid" = "#4CAF50", "Classical" = "#2E86AB")[tc_acpl$tc_category]),
+        error_y = list(array = ~sd_acpl, color = "#adb5bd"),
+        hovertemplate = "%{x}<br>ACPL: %{y:.1f}<br>Games: %{customdata}<extra></extra>",
         customdata = ~n_games) %>%
   layout(
-    title = list(text = "Average Accuracy by Time Control", font = list(color = "#f0d9b5")),
+    title = list(text = "Avg Centipawn Loss by Time Control (lower is better)", font = list(color = "#f0d9b5")),
     xaxis = list(title = "Time Control", gridcolor = "rgba(255,255,255,0.1)"),
-    yaxis = list(title = "Accuracy (%)", range = c(0, 100), gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Avg Centipawn Loss", gridcolor = "rgba(255,255,255,0.1)"),
     paper_bgcolor = "rgba(0,0,0,0)",
     plot_bgcolor = "rgba(0,0,0,0)",
     font = list(color = "#adb5bd")
   )
 ```
 
-## Accuracy Distribution
+## ACPL Distribution
 
-```{r accuracy-dist}
-game_accuracy <- calculate_game_accuracy(player_moves %>% filter(is_player_move))
+```{r acpl-dist}
+game_acpl <- player_moves %>%
+  filter(is_player_move, !is.na(centipawn_loss)) %>%
+  group_by(game_id, player_color) %>%
+  summarise(acpl = mean(centipawn_loss, na.rm = TRUE), .groups = "drop") %>%
+  mutate(color = str_to_title(as.character(player_color)))
 
-p <- game_accuracy %>%
-  pivot_longer(cols = c(white_accuracy, black_accuracy), names_to = "color", values_to = "accuracy") %>%
-  mutate(color = str_remove(color, "_accuracy") %>% str_to_title()) %>%
-  ggplot(aes(x = accuracy, fill = color)) +
+p <- ggplot(game_acpl, aes(x = acpl, fill = color)) +
   geom_histogram(bins = 30, alpha = 0.7, position = "identity", color = NA) +
   scale_fill_manual(values = c("White" = "#f0d9b5", "Black" = "#b58863")) +
-  labs(title = "Game Accuracy Distribution",
-       subtitle = "Distribution of average accuracy per game by color",
-       x = "Accuracy (%)", y = "Number of Games", fill = "Color") +
+  labs(title = "Game ACPL Distribution",
+       subtitle = "Distribution of average centipawn loss per game by color",
+       x = "Avg Centipawn Loss", y = "Number of Games", fill = "Color") +
   theme(legend.position = "top")
 
 ggplotly(p) %>% dark_plotly()
 ```
 
-## Rating vs Accuracy
+## Rating vs ACPL
 
-```{r rating-accuracy}
+```{r rating-acpl}
 p <- acc_trend %>%
   filter(!is.na(player_rating)) %>%
   ggplot(aes(x = player_rating, y = accuracy)) +
   geom_point(alpha = 0.5, color = "#f0d9b5") +
   geom_smooth(method = "lm", color = "#2E86AB") +
-  labs(title = "Rating vs Accuracy", subtitle = "Correlation between player rating and game accuracy",
-       x = "Player Rating", y = "Accuracy (%)") +
-  coord_cartesian(ylim = c(0, 100))
+  labs(title = "Rating vs Avg Centipawn Loss",
+       subtitle = "Lower centipawn loss = better play",
+       x = "Player Rating", y = "Avg Centipawn Loss")
 
 ggplotly(p) %>% dark_plotly()
 ```

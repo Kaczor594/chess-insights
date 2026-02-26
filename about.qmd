@@ -21,17 +21,25 @@ Games are fetched daily via the Chess.com public API using a custom Python pipel
 - **Total moves analyzed:** `r format(stats$total_moves, big.mark = ",")`
 - **Analysis runs daily** via a scheduled `launchd` job
 
-## Accuracy Formula
+## Performance Metric: Average Centipawn Loss (ACPL)
 
-Move accuracy is computed using the Chess.com approximation:
+The primary metric used across this site is **Average Centipawn Loss (ACPL)** — the mean centipawn loss per move in a game. Lower values indicate more accurate play.
 
 $$
-\text{Accuracy} = 103.1668 \cdot e^{-0.04354 \cdot \text{cp\_loss}} - 3.1668
+\text{ACPL} = \frac{1}{n} \sum_{i=1}^{n} \max(0,\; \text{cp\_loss}_i)
 $$
 
-where **cp_loss** is the centipawn loss for a given move (clamped to ≥ 0). The result is bounded to [0, 100].
+where $\text{cp\_loss}_i$ is the centipawn loss for move $i$ (the difference in engine evaluation between the best move and the move played), and $n$ is the total number of moves.
 
-Game-level accuracy is the mean of all individual move accuracies within that game.
+**Rough benchmarks:**
+
+| ACPL | Level |
+|---|---|
+| < 10 | Very strong play |
+| 10–30 | Solid play |
+| 30–60 | Average club player |
+| 60–100 | Beginner-level mistakes |
+| > 100 | Frequent blunders |
 
 ## Move Classification Thresholds
 

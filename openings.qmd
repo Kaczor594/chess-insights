@@ -11,29 +11,29 @@ player_moves <- load_site_player_moves(con)
 games <- load_site_games(con)
 ```
 
-## Top Openings by Accuracy
+## Top Openings by ACPL
 
 ```{r opening-table}
 opening_perf <- calculate_opening_performance(player_moves %>% filter(is_player_move))
 
 opening_perf %>%
-  select(ECO = eco_code, Opening = opening_name, Accuracy = accuracy,
+  select(ECO = eco_code, Opening = opening_name,
          `Avg CP Loss` = avg_cp_loss, Games = n_games, Moves = n_moves) %>%
-  mutate(Accuracy = round(Accuracy, 1), `Avg CP Loss` = round(`Avg CP Loss`, 1)) %>%
+  mutate(`Avg CP Loss` = round(`Avg CP Loss`, 1)) %>%
   datatable(
-    options = list(pageLength = 15, order = list(list(2, "desc"))),
+    options = list(pageLength = 15, order = list(list(2, "asc"))),
     rownames = FALSE,
     class = "compact stripe"
   ) %>%
-  formatStyle("Accuracy",
-    background = styleColorBar(range(opening_perf$accuracy), "#b58863"),
+  formatStyle("Avg CP Loss",
+    background = styleColorBar(range(opening_perf$avg_cp_loss), "#b58863"),
     backgroundSize = "98% 88%",
     backgroundRepeat = "no-repeat",
     backgroundPosition = "center"
   )
 ```
 
-## Opening Accuracy Chart
+## Opening ACPL Chart
 
 ```{r opening-chart}
 top_openings <- opening_perf %>%
@@ -42,16 +42,19 @@ top_openings <- opening_perf %>%
     label = ifelse(nchar(opening_name) > 30, paste0(substr(opening_name, 1, 27), "..."), opening_name)
   )
 
-plot_ly(top_openings, x = ~accuracy, y = ~reorder(label, accuracy), type = "bar",
+plot_ly(top_openings, x = ~avg_cp_loss, y = ~reorder(label, -avg_cp_loss), type = "bar",
         orientation = "h",
-        marker = list(color = ~accuracy, colorscale = list(c(0, "#b58863"), c(1, "#f0d9b5"))),
-        text = ~sprintf("%.1f%% (%d games)", accuracy, n_games),
+        marker = list(color = ~avg_cp_loss,
+                      colorscale = list(c(0, "#4CAF50"), c(1, "#F44336")),
+                      reversescale = FALSE),
+        text = ~sprintf("%.1f ACPL (%d games)", avg_cp_loss, n_games),
         textposition = "outside",
-        hovertemplate = "%{y}<br>Accuracy: %{x:.1f}%<br>Games: %{customdata}<extra></extra>",
+        textfont = list(color = "#f0d9b5"),
+        hovertemplate = "%{y}<br>ACPL: %{x:.1f}<br>Games: %{customdata}<extra></extra>",
         customdata = ~n_games) %>%
   layout(
-    title = list(text = "Top 15 Openings by Accuracy", font = list(color = "#f0d9b5")),
-    xaxis = list(title = "Accuracy (%)", range = c(0, 105), gridcolor = "rgba(255,255,255,0.1)"),
+    title = list(text = "Top 15 Openings by ACPL (lower is better)", font = list(color = "#f0d9b5")),
+    xaxis = list(title = "Avg Centipawn Loss", gridcolor = "rgba(255,255,255,0.1)"),
     yaxis = list(title = "", gridcolor = "rgba(255,255,255,0.1)"),
     paper_bgcolor = "rgba(0,0,0,0)",
     plot_bgcolor = "rgba(0,0,0,0)",

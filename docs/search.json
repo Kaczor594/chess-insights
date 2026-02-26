@@ -14,11 +14,11 @@
     "text": "This site displays automated chess analytics for kaczor594 on chesscom.\nGames are fetched daily via the Chess.com public API using a custom Python pipeline. Each game’s PGN is parsed and every move is analyzed with Stockfish (depth 15–25) to compute per-move evaluations and centipawn loss.\n\nTotal games in database: 5438\nFully analyzed games: 5429\nTotal moves analyzed: 362,492\nAnalysis runs daily via a scheduled launchd job"
   },
   {
-    "objectID": "about.html#accuracy-formula",
-    "href": "about.html#accuracy-formula",
+    "objectID": "about.html#performance-metric-average-centipawn-loss-acpl",
+    "href": "about.html#performance-metric-average-centipawn-loss-acpl",
     "title": "About",
-    "section": "Accuracy Formula",
-    "text": "Accuracy Formula\nMove accuracy is computed using the Chess.com approximation:\n\\[\n\\text{Accuracy} = 103.1668 \\cdot e^{-0.04354 \\cdot \\text{cp\\_loss}} - 3.1668\n\\]\nwhere cp_loss is the centipawn loss for a given move (clamped to ≥ 0). The result is bounded to [0, 100].\nGame-level accuracy is the mean of all individual move accuracies within that game."
+    "section": "Performance Metric: Average Centipawn Loss (ACPL)",
+    "text": "Performance Metric: Average Centipawn Loss (ACPL)\nThe primary metric used across this site is Average Centipawn Loss (ACPL) — the mean centipawn loss per move in a game. Lower values indicate more accurate play.\n\\[\n\\text{ACPL} = \\frac{1}{n} \\sum_{i=1}^{n} \\max(0,\\; \\text{cp\\_loss}_i)\n\\]\nwhere \\(\\text{cp\\_loss}_i\\) is the centipawn loss for move \\(i\\) (the difference in engine evaluation between the best move and the move played), and \\(n\\) is the total number of moves.\nRough benchmarks:\n\n\n\nACPL\nLevel\n\n\n\n\n&lt; 10\nVery strong play\n\n\n10–30\nSolid play\n\n\n30–60\nAverage club player\n\n\n60–100\nBeginner-level mistakes\n\n\n&gt; 100\nFrequent blunders"
   },
   {
     "objectID": "about.html#move-classification-thresholds",
@@ -39,14 +39,14 @@
     "href": "about.html#technology-stack",
     "title": "About",
     "section": "Technology Stack",
-    "text": "Technology Stack\n\nData pipeline: Python (python-chess, requests)\nEngine: Stockfish\nDatabase: SQLite\nAnalytics: R (tidyverse, plotly, DBI)\nSite: Quarto → GitHub Pages\n\n\nLast updated: February 26, 2026 at 04:02 CET"
+    "text": "Technology Stack\n\nData pipeline: Python (python-chess, requests)\nEngine: Stockfish\nDatabase: SQLite\nAnalytics: R (tidyverse, plotly, DBI)\nSite: Quarto → GitHub Pages\n\n\nLast updated: February 26, 2026 at 23:08 CET"
   },
   {
-    "objectID": "phases.html#phase-accuracy-over-time",
-    "href": "phases.html#phase-accuracy-over-time",
+    "objectID": "phases.html#phase-acpl-over-time",
+    "href": "phases.html#phase-acpl-over-time",
     "title": "Game Phase Analysis",
-    "section": "Phase Accuracy Over Time",
-    "text": "Phase Accuracy Over Time"
+    "section": "Phase ACPL Over Time",
+    "text": "Phase ACPL Over Time"
   },
   {
     "objectID": "phases.html#move-quality-by-phase",
@@ -63,39 +63,39 @@
     "text": "Critical Moments"
   },
   {
-    "objectID": "accuracy.html#accuracy-by-time-control",
-    "href": "accuracy.html#accuracy-by-time-control",
-    "title": "Accuracy Trends",
-    "section": "Accuracy by Time Control",
-    "text": "Accuracy by Time Control"
+    "objectID": "accuracy.html#acpl-by-time-control",
+    "href": "accuracy.html#acpl-by-time-control",
+    "title": "Centipawn Loss Trends",
+    "section": "ACPL by Time Control",
+    "text": "ACPL by Time Control"
   },
   {
-    "objectID": "accuracy.html#accuracy-distribution",
-    "href": "accuracy.html#accuracy-distribution",
-    "title": "Accuracy Trends",
-    "section": "Accuracy Distribution",
-    "text": "Accuracy Distribution"
+    "objectID": "accuracy.html#acpl-distribution",
+    "href": "accuracy.html#acpl-distribution",
+    "title": "Centipawn Loss Trends",
+    "section": "ACPL Distribution",
+    "text": "ACPL Distribution"
   },
   {
-    "objectID": "accuracy.html#rating-vs-accuracy",
-    "href": "accuracy.html#rating-vs-accuracy",
-    "title": "Accuracy Trends",
-    "section": "Rating vs Accuracy",
-    "text": "Rating vs Accuracy"
+    "objectID": "accuracy.html#rating-vs-acpl",
+    "href": "accuracy.html#rating-vs-acpl",
+    "title": "Centipawn Loss Trends",
+    "section": "Rating vs ACPL",
+    "text": "Rating vs ACPL"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Chess Insights Dashboard",
     "section": "",
-    "text": "5429\nAnalyzed Games\n\n\n\n\n50.3%\nAvg Accuracy\n\n\n\n\nFeb 2015 — Feb 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
+    "text": "5429\nAnalyzed Games\n\n\n\n\n275.7\nAvg Centipawn Loss\n\n\n\n\nFeb 2015 — Feb 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
   },
   {
     "objectID": "index.html#overview",
     "href": "index.html#overview",
     "title": "Chess Insights Dashboard",
     "section": "",
-    "text": "5429\nAnalyzed Games\n\n\n\n\n50.3%\nAvg Accuracy\n\n\n\n\nFeb 2015 — Feb 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
+    "text": "5429\nAnalyzed Games\n\n\n\n\n275.7\nAvg Centipawn Loss\n\n\n\n\nFeb 2015 — Feb 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
   },
   {
     "objectID": "index.html#recent-performance",
@@ -112,18 +112,18 @@
     "text": "Move Quality Distribution"
   },
   {
-    "objectID": "index.html#rating-vs-accuracy",
-    "href": "index.html#rating-vs-accuracy",
+    "objectID": "index.html#rating-vs-avg-centipawn-loss",
+    "href": "index.html#rating-vs-avg-centipawn-loss",
     "title": "Chess Insights Dashboard",
-    "section": "Rating vs Accuracy",
-    "text": "Rating vs Accuracy"
+    "section": "Rating vs Avg Centipawn Loss",
+    "text": "Rating vs Avg Centipawn Loss"
   },
   {
-    "objectID": "openings.html#opening-accuracy-chart",
-    "href": "openings.html#opening-accuracy-chart",
+    "objectID": "openings.html#opening-acpl-chart",
+    "href": "openings.html#opening-acpl-chart",
     "title": "Opening Performance",
-    "section": "Opening Accuracy Chart",
-    "text": "Opening Accuracy Chart"
+    "section": "Opening ACPL Chart",
+    "text": "Opening ACPL Chart"
   },
   {
     "objectID": "openings.html#win-rate-by-opening",
@@ -154,10 +154,10 @@
     "text": "Time Pressure Frequency"
   },
   {
-    "objectID": "time-management.html#accuracy-by-time-control-category",
-    "href": "time-management.html#accuracy-by-time-control-category",
+    "objectID": "time-management.html#acpl-by-time-control-category",
+    "href": "time-management.html#acpl-by-time-control-category",
     "title": "Time Management",
-    "section": "Accuracy by Time Control Category",
-    "text": "Accuracy by Time Control Category"
+    "section": "ACPL by Time Control Category",
+    "text": "ACPL by Time Control Category"
   }
 ]

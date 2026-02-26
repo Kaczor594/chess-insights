@@ -25,9 +25,9 @@ stats <- get_db_stats(con)
 
 ::: {.g-col-3}
 ::: {.stat-card}
-[`r sprintf("%.1f%%", mean(calculate_accuracy(player_moves$centipawn_loss[player_moves$is_player_move & !is.na(player_moves$centipawn_loss)])))`]{.stat-value}
+[`r sprintf("%.1f", mean(player_moves$centipawn_loss[player_moves$is_player_move & !is.na(player_moves$centipawn_loss)]))`]{.stat-value}
 
-[Avg Accuracy]{.stat-label}
+[Avg Centipawn Loss]{.stat-label}
 :::
 :::
 
@@ -59,15 +59,15 @@ last_20 <- acc_trend %>% tail(20)
 plot_ly(last_20, x = ~game_num, y = ~accuracy, type = "scatter", mode = "markers+lines",
         marker = list(size = 8, color = "#f0d9b5"),
         line = list(color = "#2E86AB"),
-        hovertemplate = "Game %{x}<br>Accuracy: %{y:.1f}%<extra></extra>") %>%
+        hovertemplate = "Game %{x}<br>ACPL: %{y:.1f}<extra></extra>") %>%
   add_trace(y = ~rolling_accuracy, mode = "lines",
             line = list(color = "#b58863", width = 3, dash = "dot"),
             name = "Rolling Avg",
-            hovertemplate = "Rolling Avg: %{y:.1f}%<extra></extra>") %>%
+            hovertemplate = "Rolling Avg: %{y:.1f}<extra></extra>") %>%
   layout(
-    title = list(text = "Last 20 Games — Accuracy", font = list(color = "#f0d9b5")),
+    title = list(text = "Last 20 Games — Avg Centipawn Loss (lower is better)", font = list(color = "#f0d9b5")),
     xaxis = list(title = "Game Number", gridcolor = "rgba(255,255,255,0.1)"),
-    yaxis = list(title = "Accuracy (%)", range = c(0, 100), gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Avg Centipawn Loss", gridcolor = "rgba(255,255,255,0.1)"),
     paper_bgcolor = "rgba(0,0,0,0)",
     plot_bgcolor = "rgba(0,0,0,0)",
     font = list(color = "#adb5bd"),
@@ -99,17 +99,17 @@ plot_ly(move_dist, labels = ~move_quality, values = ~n, type = "pie",
   )
 ```
 
-## Rating vs Accuracy
+## Rating vs Avg Centipawn Loss
 
-```{r rating-accuracy}
+```{r rating-acpl}
 p <- acc_trend %>%
   filter(!is.na(player_rating)) %>%
   ggplot(aes(x = player_rating, y = accuracy)) +
   geom_point(alpha = 0.5, color = "#f0d9b5") +
   geom_smooth(method = "lm", color = "#2E86AB") +
-  labs(title = "Rating vs Accuracy", subtitle = "Correlation between player rating and game accuracy",
-       x = "Player Rating", y = "Accuracy (%)") +
-  coord_cartesian(ylim = c(0, 100))
+  labs(title = "Rating vs Avg Centipawn Loss",
+       subtitle = "Lower centipawn loss = better play",
+       x = "Player Rating", y = "Avg Centipawn Loss")
 
 ggplotly(p) %>% dark_plotly()
 ```

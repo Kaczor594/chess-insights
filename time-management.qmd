@@ -10,24 +10,41 @@ player_moves <- load_site_player_moves(con)
 my_moves <- player_moves %>% filter(is_player_move)
 ```
 
-## Accuracy by Time Remaining
+## ACPL by Time Remaining
 
-```{r time-accuracy}
-time_acc <- calculate_time_accuracy(my_moves)
+```{r time-acpl}
+time_acpl <- my_moves %>%
+  filter(!is.na(centipawn_loss), !is.na(clock_time_remaining)) %>%
+  mutate(
+    time_category = case_when(
+      clock_time_remaining <= 10 ~ "Critical (<10s)",
+      clock_time_remaining <= 30 ~ "Low (10-30s)",
+      clock_time_remaining <= 60 ~ "Medium (30-60s)",
+      clock_time_remaining <= 180 ~ "Comfortable (1-3m)",
+      TRUE ~ "Plenty (>3m)"
+    ) %>%
+      factor(levels = c("Critical (<10s)", "Low (10-30s)", "Medium (30-60s)",
+                         "Comfortable (1-3m)", "Plenty (>3m)"))
+  ) %>%
+  group_by(time_category) %>%
+  summarise(
+    acpl = mean(centipawn_loss, na.rm = TRUE),
+    n_moves = n(),
+    .groups = "drop"
+  )
 
-plot_ly(time_acc, x = ~time_category, y = ~accuracy, type = "bar",
-        marker = list(color = ~accuracy,
-                      colorscale = list(c(0, "#F44336"), c(0.5, "#FFC107"), c(1, "#4CAF50")),
-                      cmin = 0, cmax = 100),
-        text = ~sprintf("%.1f%%", accuracy),
+plot_ly(time_acpl, x = ~time_category, y = ~acpl, type = "bar",
+        marker = list(color = ~acpl,
+                      colorscale = list(c(0, "#4CAF50"), c(1, "#F44336"))),
+        text = ~sprintf("%.1f", acpl),
         textposition = "outside",
         textfont = list(color = "#f0d9b5"),
-        hovertemplate = "%{x}<br>Accuracy: %{y:.1f}%<br>Moves: %{customdata}<extra></extra>",
+        hovertemplate = "%{x}<br>ACPL: %{y:.1f}<br>Moves: %{customdata}<extra></extra>",
         customdata = ~n_moves) %>%
   layout(
-    title = list(text = "Accuracy by Time Remaining", font = list(color = "#f0d9b5")),
+    title = list(text = "Avg Centipawn Loss by Time Remaining (lower is better)", font = list(color = "#f0d9b5")),
     xaxis = list(title = "Time Remaining", gridcolor = "rgba(255,255,255,0.1)"),
-    yaxis = list(title = "Accuracy (%)", range = c(0, 105), gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Avg Centipawn Loss", gridcolor = "rgba(255,255,255,0.1)"),
     paper_bgcolor = "rgba(0,0,0,0)",
     plot_bgcolor = "rgba(0,0,0,0)",
     font = list(color = "#adb5bd")
@@ -98,6 +115,7 @@ plot_ly(pressure_stats, x = ~threshold, y = ~pct, type = "bar",
         marker = list(color = c("#F44336", "#FF9800", "#FFC107")),
         text = ~sprintf("%.0f%% (%d games)", pct, games_affected),
         textposition = "outside",
+        textfont = list(color = "#f0d9b5"),
         hovertemplate = "%{x}<br>%{text}<extra></extra>") %>%
   layout(
     title = list(text = "How Often Does the Clock Get Low?", font = list(color = "#f0d9b5")),
@@ -110,34 +128,33 @@ plot_ly(pressure_stats, x = ~threshold, y = ~pct, type = "bar",
   )
 ```
 
-## Accuracy by Time Control Category
+## ACPL by Time Control Category
 
-```{r accuracy-by-tc}
-tc_accuracy <- my_moves %>%
+```{r acpl-by-tc}
+tc_acpl <- my_moves %>%
   filter(!is.na(centipawn_loss), !is.na(time_control_seconds)) %>%
   mutate(tc_category = classify_time_control(time_control_seconds)) %>%
   group_by(game_id, tc_category) %>%
   summarise(
-    accuracy = calculate_accuracy(mean(centipawn_loss, na.rm = TRUE)),
+    acpl = mean(centipawn_loss, na.rm = TRUE),
     .groups = "drop"
   )
 
 tc_category_order <- c("Bullet", "Blitz", "Rapid", "Classical")
 tc_colors <- c("Bullet" = "#F44336", "Blitz" = "#FF9800", "Rapid" = "#4CAF50", "Classical" = "#2E86AB")
 
-p <- tc_accuracy %>%
+p <- tc_acpl %>%
   mutate(tc_category = factor(tc_category, levels = tc_category_order)) %>%
-  ggplot(aes(x = tc_category, y = accuracy, fill = tc_category)) +
+  ggplot(aes(x = tc_category, y = acpl, fill = tc_category)) +
   geom_violin(alpha = 0.7, scale = "width") +
   geom_boxplot(width = 0.15, fill = "#adb5bd", alpha = 0.6, outlier.shape = NA, color = "#f0d9b5") +
   scale_fill_manual(values = tc_colors) +
   labs(
-    title = "Accuracy Distribution by Time Control",
+    title = "ACPL Distribution by Time Control (lower is better)",
     x = "Time Control",
-    y = "Accuracy (%)"
+    y = "Avg Centipawn Loss"
   ) +
-  theme(legend.position = "none") +
-  coord_cartesian(ylim = c(0, 100))
+  theme(legend.position = "none")
 
 ggplotly(p) %>% dark_plotly()
 ```

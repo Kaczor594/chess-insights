@@ -17,7 +17,7 @@ website:
       - href: index.qmd
         text: Overview
       - href: accuracy.qmd
-        text: Accuracy
+        text: Centipawn Loss
       - href: openings.qmd
         text: Openings
       - href: phases.qmd

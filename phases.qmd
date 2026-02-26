@@ -10,51 +10,59 @@ player_moves <- load_site_player_moves(con)
 my_moves <- player_moves %>% filter(is_player_move)
 ```
 
-## Phase Accuracy Overview
+## Phase ACPL Overview
 
 ```{r phase-overview}
-phase_acc <- calculate_phase_accuracy(my_moves)
+phase_acpl <- my_moves %>%
+  filter(!is.na(centipawn_loss), !is.na(game_phase)) %>%
+  group_by(game_id, color, game_phase) %>%
+  summarise(
+    acpl = mean(centipawn_loss, na.rm = TRUE),
+    n_moves = n(),
+    .groups = "drop"
+  )
 
-phase_summary <- phase_acc %>%
+phase_summary <- phase_acpl %>%
   group_by(game_phase) %>%
   summarise(
-    mean_accuracy = mean(accuracy, na.rm = TRUE),
-    sd_accuracy = sd(accuracy, na.rm = TRUE),
+    mean_acpl = mean(acpl, na.rm = TRUE),
+    sd_acpl = sd(acpl, na.rm = TRUE),
     n = n(),
     .groups = "drop"
   )
 
-plot_ly(phase_summary, x = ~game_phase, y = ~mean_accuracy, type = "bar",
+plot_ly(phase_summary, x = ~game_phase, y = ~mean_acpl, type = "bar",
         marker = list(color = c("#2E86AB", "#f0d9b5", "#b58863")),
-        error_y = list(array = ~sd_accuracy, color = "#adb5bd"),
-        text = ~sprintf("%.1f%%", mean_accuracy),
+        error_y = list(array = ~sd_acpl, color = "#adb5bd"),
+        text = ~sprintf("%.1f", mean_acpl),
         textposition = "outside",
-        hovertemplate = "%{x}<br>Accuracy: %{y:.1f}% ± %{error_y.array:.1f}%<extra></extra>") %>%
+        textfont = list(color = "#f0d9b5"),
+        hovertemplate = "%{x}<br>ACPL: %{y:.1f} ± %{error_y.array:.1f}<extra></extra>") %>%
   layout(
-    title = list(text = "Average Accuracy by Game Phase", font = list(color = "#f0d9b5")),
+    title = list(text = "Avg Centipawn Loss by Game Phase (lower is better)", font = list(color = "#f0d9b5")),
     xaxis = list(title = "Game Phase", gridcolor = "rgba(255,255,255,0.1)"),
-    yaxis = list(title = "Accuracy (%)", range = c(0, 105), gridcolor = "rgba(255,255,255,0.1)"),
+    yaxis = list(title = "Avg Centipawn Loss", gridcolor = "rgba(255,255,255,0.1)"),
     paper_bgcolor = "rgba(0,0,0,0)",
     plot_bgcolor = "rgba(0,0,0,0)",
     font = list(color = "#adb5bd")
   )
 ```
 
-## Phase Accuracy Over Time
+## Phase ACPL Over Time
 
 ```{r phase-trend}
 phase_trend <- my_moves %>%
   filter(!is.na(centipawn_loss), !is.na(game_phase)) %>%
   group_by(game_id, date_played, game_phase) %>%
   summarise(
-    accuracy = calculate_accuracy(mean(centipawn_loss, na.rm = TRUE)),
+    acpl = mean(centipawn_loss, na.rm = TRUE),
     .groups = "drop"
   ) %>%
   arrange(date_played) %>%
   group_by(game_phase) %>%
   mutate(
     game_num = row_number(),
-    rolling_accuracy = slider::slide_dbl(accuracy, mean, .before = 9, .complete = FALSE)
+    rolling_acpl = slider::slide_dbl(acpl, mean, .before = 9, .complete = FALSE)
   ) %>%
   ungroup()
 
@@ -63,18 +71,18 @@ phase_colors <- c("opening" = "#2E86AB", "middlegame" = "#f0d9b5", "endgame" = "
 p <- plot_ly()
 for (phase in names(phase_colors)) {
   d <- phase_trend %>% filter(game_phase == phase)
-  p <- p %>% add_trace(data = d, x = ~game_num, y = ~rolling_accuracy,
+  p <- p %>% add_trace(data = d, x = ~game_num, y = ~rolling_acpl,
                         type = "scatter", mode = "lines",
                         name = str_to_title(phase),
                         line = list(color = phase_colors[phase], width = 2),
                         hovertemplate = paste0(str_to_title(phase),
-                                               "<br>Game %{x}<br>Accuracy: %{y:.1f}%<extra></extra>"))
+                                               "<br>Game %{x}<br>ACPL: %{y:.1f}<extra></extra>"))
 }
 
 p %>% layout(
-  title = list(text = "Rolling Phase Accuracy (10-game window)", font = list(color = "#f0d9b5")),
+  title = list(text = "Rolling ACPL by Phase (10-game window, lower is better)", font = list(color = "#f0d9b5")),
   xaxis = list(title = "Game Number", gridcolor = "rgba(255,255,255,0.1)"),
-  yaxis = list(title = "Accuracy (%)", range = c(0, 100), gridcolor = "rgba(255,255,255,0.1)"),
+  yaxis = list(title = "Avg Centipawn Loss", gridcolor = "rgba(255,255,255,0.1)"),
   paper_bgcolor = "rgba(0,0,0,0)",
   plot_bgcolor = "rgba(0,0,0,0)",
   font = list(color = "#adb5bd"),
@@ -138,10 +146,10 @@ if (nrow(critical) > 0) {
       options = list(pageLength = 15, order = list(list(4, "desc"))),
       rownames = FALSE,
       class = "compact stripe",
-      caption = "Top 50 critical moments (centipawn loss ≥ 100)"
+      caption = "Top 50 critical moments (centipawn loss >= 100)"
     )
 } else {
-  cat("No critical moments found with centipawn loss ≥ 100.")
+  cat("No critical moments found with centipawn loss >= 100.")
 }
 ```
 

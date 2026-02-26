@@ -123,7 +123,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./accuracy.html"> 
-<span class="menu-text">Accuracy</span></a>
+<span class="menu-text">Centipawn Loss</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./openings.html"> 
@@ -158,7 +158,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#data-collection" id="toc-data-collection" class="nav-link active" data-scroll-target="#data-collection">Data Collection</a></li>
-  <li><a href="#accuracy-formula" id="toc-accuracy-formula" class="nav-link" data-scroll-target="#accuracy-formula">Accuracy Formula</a></li>
+  <li><a href="#performance-metric-average-centipawn-loss-acpl" id="toc-performance-metric-average-centipawn-loss-acpl" class="nav-link" data-scroll-target="#performance-metric-average-centipawn-loss-acpl">Performance Metric: Average Centipawn Loss (ACPL)</a></li>
   <li><a href="#move-classification-thresholds" id="toc-move-classification-thresholds" class="nav-link" data-scroll-target="#move-classification-thresholds">Move Classification Thresholds</a></li>
   <li><a href="#game-phase-definitions" id="toc-game-phase-definitions" class="nav-link" data-scroll-target="#game-phase-definitions">Game Phase Definitions</a></li>
   <li><a href="#technology-stack" id="toc-technology-stack" class="nav-link" data-scroll-target="#technology-stack">Technology Stack</a></li>
@@ -199,14 +199,44 @@ window.Quarto = {
 <li><strong>Analysis runs daily</strong> via a scheduled <code>launchd</code> job</li>
 </ul>
 </section>
-<section id="accuracy-formula" class="level2">
-<h2 class="anchored" data-anchor-id="accuracy-formula">Accuracy Formula</h2>
-<p>Move accuracy is computed using the Chess.com approximation:</p>
+<section id="performance-metric-average-centipawn-loss-acpl" class="level2">
+<h2 class="anchored" data-anchor-id="performance-metric-average-centipawn-loss-acpl">Performance Metric: Average Centipawn Loss (ACPL)</h2>
+<p>The primary metric used across this site is <strong>Average Centipawn Loss (ACPL)</strong> — the mean centipawn loss per move in a game. Lower values indicate more accurate play.</p>
 <p><span class="math display">\[
-\text{Accuracy} = 103.1668 \cdot e^{-0.04354 \cdot \text{cp\_loss}} - 3.1668
+\text{ACPL} = \frac{1}{n} \sum_{i=1}^{n} \max(0,\; \text{cp\_loss}_i)
 \]</span></p>
-<p>where <strong>cp_loss</strong> is the centipawn loss for a given move (clamped to ≥ 0). The result is bounded to [0, 100].</p>
-<p>Game-level accuracy is the mean of all individual move accuracies within that game.</p>
+<p>where <span class="math inline">\(\text{cp\_loss}_i\)</span> is the centipawn loss for move <span class="math inline">\(i\)</span> (the difference in engine evaluation between the best move and the move played), and <span class="math inline">\(n\)</span> is the total number of moves.</p>
+<p><strong>Rough benchmarks:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ACPL</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt; 10</td>
+<td>Very strong play</td>
+</tr>
+<tr class="even">
+<td>10–30</td>
+<td>Solid play</td>
+</tr>
+<tr class="odd">
+<td>30–60</td>
+<td>Average club player</td>
+</tr>
+<tr class="even">
+<td>60–100</td>
+<td>Beginner-level mistakes</td>
+</tr>
+<tr class="odd">
+<td>&gt; 100</td>
+<td>Frequent blunders</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="move-classification-thresholds" class="level2">
 <h2 class="anchored" data-anchor-id="move-classification-thresholds">Move Classification Thresholds</h2>
@@ -285,7 +315,7 @@ window.Quarto = {
 <li><strong>Site:</strong> Quarto → GitHub Pages</li>
 </ul>
 <hr>
-<p><em>Last updated: February 26, 2026 at 04:02 CET</em></p>
+<p><em>Last updated: February 26, 2026 at 23:08 CET</em></p>
 
 
 </section>

@@ -438,3 +438,378 @@ Analysis complete!
   Games failed: 0
 2026-02-23 03:37:55 - Daily sync completed
 ---
+2026-02-24 03:00:01 - Starting daily sync
+Fetching games since 2026-02-22T19:17:31
+⠴ Stored 7 games...
+Fetch complete!
+  Games stored: 7
+  Games skipped (already exist): 0
+2026-02-24 03:00:03 - Fetch completed successfully
+Found 7 games to analyze at depth 15
+Analyzing 7 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 7
+  Games failed: 0
+2026-02-24 03:00:48 - Rendering Quarto site
+[1m[34m[1/6] index.qmd[39m[22m
+[31m
+
+processing file: index.qmd
+[39m1/11                     
+2/11 [setup]             
+3/11                     
+4/11 [recent-performance]
+5/11                     
+6/11 [move-quality]      
+7/11                     
+8/11 [rating-accuracy]   
+9/11                     
+10/11 [cleanup]           
+11/11                     
+[31moutput file: index.knit.md
+
+[39m[1m[34m[2/6] accuracy.qmd[39m[22m
+[31m
+
+processing file: accuracy.qmd
+[39m1/13                  
+2/13 [setup]          
+3/13                  
+4/13 [accuracy-trend] 
+5/13                  
+6/13 [accuracy-by-tc] 
+7/13                  
+8/13 [accuracy-dist]  
+9/13                  
+10/13 [rating-accuracy]
+11/13                  
+12/13 [cleanup]        
+13/13                  
+[31moutput file: accuracy.knit.md
+
+[39m[1m[34m[3/6] openings.qmd[39m[22m
+[31m
+
+processing file: openings.qmd
+[39m1/13                   
+2/13 [setup]           
+3/13                   
+4/13 [opening-table]   
+5/13                   
+6/13 [opening-chart]   
+7/13                   
+8/13 [win-rate]        
+9/13                   
+10/13 [repertoire-split]
+11/13                   
+12/13 [cleanup]         
+13/13                   
+[31moutput file: openings.knit.md
+
+[39m[1m[34m[4/6] phases.qmd[39m[22m
+[31m
+
+processing file: phases.qmd
+[39m1/13                     
+2/13 [setup]             
+3/13                     
+4/13 [phase-overview]    
+5/13                     
+6/13 [phase-trend]       
+7/13                     
+8/13 [move-quality-phase]
+9/13                     
+10/13 [critical-moments]  
+11/13                     
+12/13 [cleanup]           
+13/13                     
+[31moutput file: phases.knit.md
+
+[39m[1m[34m[5/6] time-management.qmd[39m[22m
+[31m
+
+processing file: time-management.qmd
+[39m1/13                 
+2/13 [setup]         
+3/13                 
+4/13 [time-accuracy] 
+5/13                 
+6/13 [time-per-move] 
+7/13                 
+8/13 [time-pressure] 
+9/13                 
+10/13 [accuracy-by-tc]
+11/13                 
+12/13 [cleanup]       
+13/13                 
+[31moutput file: time-management.knit.md
+
+[39m[1m[34m[6/6] about.qmd[39m[22m
+[31m
+
+processing file: about.qmd
+[39m1/3        
+2/3 [setup]
+3/3        
+[31moutput file: about.knit.md
+
+[39m
+Output created: docs/index.html
+
+2026-02-24 03:01:06 - Quarto render completed
+To https://github.com/Kaczor594/chess-insights.git
+   a08723a..c70c952  master -> master
+2026-02-24 03:01:10 - Site pushed to GitHub
+2026-02-24 03:01:10 - Daily sync completed
+---
+2026-02-25 03:22:58 - Starting daily sync
+Fetching games since 2026-02-23T21:32:04
+⠼ Stored 4 games...
+Fetch complete!
+  Games stored: 4
+  Games skipped (already exist): 0
+2026-02-25 03:23:01 - Fetch completed successfully
+Found 4 games to analyze at depth 15
+Analyzing 4 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 4
+  Games failed: 0
+2026-02-25 03:23:37 - Rendering Quarto site
+[1m[34m[1/6] index.qmd[39m[22m
+[31m
+
+processing file: index.qmd
+[39m1/11                     
+2/11 [setup]             
+3/11                     
+4/11 [recent-performance]
+5/11                     
+6/11 [move-quality]      
+7/11                     
+8/11 [rating-accuracy]   
+9/11                     
+10/11 [cleanup]           
+11/11                     
+[31moutput file: index.knit.md
+
+[39m[1m[34m[2/6] accuracy.qmd[39m[22m
+[31m
+
+processing file: accuracy.qmd
+[39m1/13                  
+2/13 [setup]          
+3/13                  
+4/13 [accuracy-trend] 
+5/13                  
+6/13 [accuracy-by-tc] 
+7/13                  
+8/13 [accuracy-dist]  
+9/13                  
+10/13 [rating-accuracy]
+11/13                  
+12/13 [cleanup]        
+13/13                  
+[31moutput file: accuracy.knit.md
+
+[39m[1m[34m[3/6] openings.qmd[39m[22m
+[31m
+
+processing file: openings.qmd
+[39m1/13                   
+2/13 [setup]           
+3/13                   
+4/13 [opening-table]   
+5/13                   
+6/13 [opening-chart]   
+7/13                   
+8/13 [win-rate]        
+9/13                   
+10/13 [repertoire-split]
+11/13                   
+12/13 [cleanup]         
+13/13                   
+[31moutput file: openings.knit.md
+
+[39m[1m[34m[4/6] phases.qmd[39m[22m
+[31m
+
+processing file: phases.qmd
+[39m1/13                     
+2/13 [setup]             
+3/13                     
+4/13 [phase-overview]    
+5/13                     
+6/13 [phase-trend]       
+7/13                     
+8/13 [move-quality-phase]
+9/13                     
+10/13 [critical-moments]  
+11/13                     
+12/13 [cleanup]           
+13/13                     
+[31moutput file: phases.knit.md
+
+[39m[1m[34m[5/6] time-management.qmd[39m[22m
+[31m
+
+processing file: time-management.qmd
+[39m1/13                 
+2/13 [setup]         
+3/13                 
+4/13 [time-accuracy] 
+5/13                 
+6/13 [time-per-move] 
+7/13                 
+8/13 [time-pressure] 
+9/13                 
+10/13 [accuracy-by-tc]
+11/13                 
+12/13 [cleanup]       
+13/13                 
+[31moutput file: time-management.knit.md
+
+[39m[1m[34m[6/6] about.qmd[39m[22m
+[31m
+
+processing file: about.qmd
+[39m1/3        
+2/3 [setup]
+3/3        
+[31moutput file: about.knit.md
+
+[39m
+Output created: docs/index.html
+
+2026-02-25 03:58:41 - Quarto render completed
+To https://github.com/Kaczor594/chess-insights.git
+   c70c952..87f7481  master -> master
+2026-02-25 03:58:43 - Site pushed to GitHub
+2026-02-25 03:58:43 - Daily sync completed
+---
+2026-02-26 03:40:47 - Starting daily sync
+Fetching games since 2026-02-24T19:03:27
+⠦ Stored 1 games...
+Fetch complete!
+  Games stored: 1
+  Games skipped (already exist): 0
+2026-02-26 03:40:51 - Fetch completed successfully
+Found 1 games to analyze at depth 15
+Analyzing 1 games... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Analysis complete!
+  Games analyzed: 1
+  Games failed: 0
+2026-02-26 03:41:18 - Rendering Quarto site
+[1m[34m[1/6] index.qmd[39m[22m
+[31m
+
+processing file: index.qmd
+[39m1/11                     
+2/11 [setup]             
+3/11                     
+4/11 [recent-performance]
+5/11                     
+6/11 [move-quality]      
+7/11                     
+8/11 [rating-accuracy]   
+9/11                     
+10/11 [cleanup]           
+11/11                     
+[31moutput file: index.knit.md
+
+[39m[1m[34m[2/6] accuracy.qmd[39m[22m
+[31m
+
+processing file: accuracy.qmd
+[39m1/13                  
+2/13 [setup]          
+3/13                  
+4/13 [accuracy-trend] 
+5/13                  
+6/13 [accuracy-by-tc] 
+7/13                  
+8/13 [accuracy-dist]  
+9/13                  
+10/13 [rating-accuracy]
+11/13                  
+12/13 [cleanup]        
+13/13                  
+[31moutput file: accuracy.knit.md
+
+[39m[1m[34m[3/6] openings.qmd[39m[22m
+[31m
+
+processing file: openings.qmd
+[39m1/13                   
+2/13 [setup]           
+3/13                   
+4/13 [opening-table]   
+5/13                   
+6/13 [opening-chart]   
+7/13                   
+8/13 [win-rate]        
+9/13                   
+10/13 [repertoire-split]
+11/13                   
+12/13 [cleanup]         
+13/13                   
+[31moutput file: openings.knit.md
+
+[39m[1m[34m[4/6] phases.qmd[39m[22m
+[31m
+
+processing file: phases.qmd
+[39m1/13                     
+2/13 [setup]             
+3/13                     
+4/13 [phase-overview]    
+5/13                     
+6/13 [phase-trend]       
+7/13                     
+8/13 [move-quality-phase]
+9/13                     
+10/13 [critical-moments]  
+11/13                     
+12/13 [cleanup]           
+13/13                     
+[31moutput file: phases.knit.md
+
+[39m[1m[34m[5/6] time-management.qmd[39m[22m
+[31m
+
+processing file: time-management.qmd
+[39m1/13                 
+2/13 [setup]         
+3/13                 
+4/13 [time-accuracy] 
+5/13                 
+6/13 [time-per-move] 
+7/13                 
+8/13 [time-pressure] 
+9/13                 
+10/13 [accuracy-by-tc]
+11/13                 
+12/13 [cleanup]       
+13/13                 
+[31moutput file: time-management.knit.md
+
+[39m[1m[34m[6/6] about.qmd[39m[22m
+[31m
+
+processing file: about.qmd
+[39m1/3        
+2/3 [setup]
+3/3        
+[31moutput file: about.knit.md
+
+[39m
+Output created: docs/index.html
+
+2026-02-26 04:02:43 - Quarto render completed
+To https://github.com/Kaczor594/chess-insights.git
+   87f7481..0d83b2f  master -> master
+2026-02-26 04:02:46 - Site pushed to GitHub
+2026-02-26 04:02:46 - Daily sync completed
+---

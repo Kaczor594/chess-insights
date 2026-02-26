@@ -66,6 +66,29 @@ load_site_games <- function(con) {
     )
 }
 
+# Override accuracy metric: use average centipawn loss directly
+# (lower is better, unlike the old exponential formula)
+calculate_accuracy <- function(centipawn_loss) {
+  cp_loss <- pmax(0, centipawn_loss, na.rm = TRUE)
+  cp_loss <- ifelse(is.na(cp_loss), 0, cp_loss)
+  return(cp_loss)
+}
+
+# Override opening performance to sort by ascending ACPL (lower = better)
+calculate_opening_performance <- function(moves) {
+  moves %>%
+    filter(!is.na(centipawn_loss), !is.na(eco_code)) %>%
+    group_by(eco_code, opening_name) %>%
+    summarise(
+      avg_cp_loss = mean(centipawn_loss, na.rm = TRUE),
+      n_games = n_distinct(game_id),
+      n_moves = n(),
+      .groups = "drop"
+    ) %>%
+    filter(n_games >= 3) %>%
+    arrange(avg_cp_loss)
+}
+
 #' Classify time control into category
 #' @param time_control_seconds Total time in seconds
 #' @return character category
