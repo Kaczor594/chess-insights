@@ -813,3 +813,122 @@ To https://github.com/Kaczor594/chess-insights.git
 2026-02-26 04:02:46 - Site pushed to GitHub
 2026-02-26 04:02:46 - Daily sync completed
 ---
+2026-02-27 03:33:24 - Starting daily sync
+Fetching games since 2026-02-25T20:13:43
+Error fetching games: HTTPSConnectionPool(host='api.chess.com', port=443): Read 
+timed out. (read timeout=None)
+⠧ Fetching games for kaczor594...
+2026-02-27 05:35:37 - Fetch completed successfully
+No pending games to analyze.
+2026-02-27 05:35:38 - Rendering Quarto site
+[1m[34m[1/6] index.qmd[39m[22m
+[31m
+
+processing file: index.qmd
+[39m1/11                     
+2/11 [setup]             
+3/11                     
+4/11 [recent-performance]
+5/11                     
+6/11 [move-quality]      
+7/11                     
+8/11 [rating-acpl]       
+9/11                     
+10/11 [cleanup]           
+11/11                     
+[31moutput file: index.knit.md
+
+[39m[1m[34m[2/6] accuracy.qmd[39m[22m
+[31m
+
+processing file: accuracy.qmd
+[39m1/13              
+2/13 [setup]      
+3/13              
+4/13 [acpl-trend] 
+5/13              
+6/13 [acpl-by-tc] 
+7/13              
+8/13 [acpl-dist]  
+9/13              
+10/13 [rating-acpl]
+11/13              
+12/13 [cleanup]    
+13/13              
+[31moutput file: accuracy.knit.md
+
+[39m[1m[34m[3/6] openings.qmd[39m[22m
+[31m
+
+processing file: openings.qmd
+[39m1/13                   
+2/13 [setup]           
+3/13                   
+4/13 [opening-table]   
+5/13                   
+6/13 [opening-chart]   
+7/13                   
+8/13 [win-rate]        
+9/13                   
+10/13 [repertoire-split]
+11/13                   
+12/13 [cleanup]         
+13/13                   
+[31moutput file: openings.knit.md
+
+[39m[1m[34m[4/6] phases.qmd[39m[22m
+[31m
+
+processing file: phases.qmd
+[39m1/13                     
+2/13 [setup]             
+3/13                     
+4/13 [phase-overview]    
+5/13                     
+6/13 [phase-trend]       
+7/13                     
+8/13 [move-quality-phase]
+9/13                     
+10/13 [critical-moments]  
+11/13                     
+12/13 [cleanup]           
+13/13                     
+[31moutput file: phases.knit.md
+
+[39m[1m[34m[5/6] time-management.qmd[39m[22m
+[31m
+
+processing file: time-management.qmd
+[39m1/13                
+2/13 [setup]        
+3/13                
+4/13 [time-acpl]    
+5/13                
+6/13 [time-per-move]
+7/13                
+8/13 [time-pressure]
+9/13                
+10/13 [acpl-by-tc]   
+11/13                
+12/13 [cleanup]      
+13/13                
+[31moutput file: time-management.knit.md
+
+[39m[1m[34m[6/6] about.qmd[39m[22m
+[31m
+
+processing file: about.qmd
+[39m1/3        
+2/3 [setup]
+3/3        
+[31moutput file: about.knit.md
+
+[39m
+Output created: docs/index.html
+
+2026-02-27 05:35:55 - Quarto render completed
+To https://github.com/Kaczor594/chess-insights.git
+   19e85c9..4fcc4cd  master -> master
+2026-02-27 05:35:58 - Site pushed to GitHub
+2026-02-27 05:35:58 - Daily sync completed
+---

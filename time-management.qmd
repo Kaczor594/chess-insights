@@ -145,16 +145,18 @@ tc_colors <- c("Bullet" = "#F44336", "Blitz" = "#FF9800", "Rapid" = "#4CAF50", "
 
 p <- tc_acpl %>%
   mutate(tc_category = factor(tc_category, levels = tc_category_order)) %>%
-  ggplot(aes(x = tc_category, y = acpl, fill = tc_category)) +
-  geom_violin(alpha = 0.7, scale = "width") +
-  geom_boxplot(width = 0.15, fill = "#adb5bd", alpha = 0.6, outlier.shape = NA, color = "#f0d9b5") +
+  filter(acpl <= quantile(acpl, 0.95)) %>%
+  ggplot(aes(x = acpl, fill = tc_category, color = tc_category)) +
+  geom_density(alpha = 0.35, linewidth = 0.8) +
   scale_fill_manual(values = tc_colors) +
+  scale_color_manual(values = tc_colors) +
   labs(
     title = "ACPL Distribution by Time Control (lower is better)",
-    x = "Time Control",
-    y = "Avg Centipawn Loss"
-  ) +
-  theme(legend.position = "none")
+    x = "Avg Centipawn Loss",
+    y = "Density",
+    fill = "Time Control",
+    color = "Time Control"
+  )
 
 ggplotly(p) %>% dark_plotly()
 ```
