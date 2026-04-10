@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS moves (
     mate_in_n_before INTEGER,
     mate_in_n_after INTEGER,
     best_move TEXT,
+    best_move_san TEXT,
     game_phase TEXT CHECK (game_phase IN ('opening', 'middlegame', 'endgame')),
     is_book_move INTEGER DEFAULT 0,
     UNIQUE(game_id, ply_number)

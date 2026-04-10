@@ -114,6 +114,7 @@ def analyze_single_game(
             "mate_in_n_before": eval_before.mate_in_n,
             "mate_in_n_after": eval_after.mate_in_n,
             "best_move": eval_before.best_move,
+            "best_move_san": eval_before.best_move_san,
             "game_phase": phases[i] if i < len(phases) else "middlegame",
             "is_book_move": 0,  # TODO: Implement book detection
         })
