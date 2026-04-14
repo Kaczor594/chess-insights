@@ -55,8 +55,9 @@ CREATE TABLE IF NOT EXISTS moves (
     mate_in_n_after INTEGER,
     best_move TEXT,
     best_move_san TEXT,
+    fen TEXT,
+    puzzle_solved INTEGER DEFAULT 0,
     game_phase TEXT CHECK (game_phase IN ('opening', 'middlegame', 'endgame')),
-    is_book_move INTEGER DEFAULT 0,
     UNIQUE(game_id, ply_number)
 );
 
@@ -81,6 +82,7 @@ CREATE INDEX IF NOT EXISTS idx_games_white_player ON games(white_player_id);
 CREATE INDEX IF NOT EXISTS idx_games_black_player ON games(black_player_id);
 CREATE INDEX IF NOT EXISTS idx_moves_game_id ON moves(game_id);
 CREATE INDEX IF NOT EXISTS idx_moves_game_phase ON moves(game_phase);
+CREATE INDEX IF NOT EXISTS idx_moves_puzzle_eligible ON moves(puzzle_solved, centipawn_loss, eval_before);
 CREATE INDEX IF NOT EXISTS idx_players_username_platform ON players(username, platform);
 
 -- Trigger to update updated_at on games

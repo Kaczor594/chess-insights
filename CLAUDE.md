@@ -25,6 +25,10 @@
 - `python/chess_insights/commands/analyze.py` — Game analysis pipeline, writes moves to DB
 - `python/chess_insights/commands/fetch.py` — Game fetching from Chess.com/Lichess APIs
 - `R/functions.R` — Site-level R wrapper, sources the full R pipeline and applies overrides
+- `web/app.py` — Flask puzzle trainer backend (run with `python web/app.py`, serves on port 8000)
+- `web/templates/index.html` — Puzzle trainer HTML (chessboard.js + chess.js)
+- `web/static/js/puzzle.js` — Client-side puzzle logic
+- `web/static/css/style.css` — Dark theme styles
 - `config.yaml` — Stockfish path, API delay settings
 - `data/chess_insights.db` — SQLite database (~64MB, gitignored)
 

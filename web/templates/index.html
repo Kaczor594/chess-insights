@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess Puzzle Trainer</title>
+
+  <!-- chessboard.js -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+
+  <!-- app styles -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Chess Puzzle Trainer</h1>
+    <div id="stats">
+      <span id="stat-correct">0</span> / <span id="stat-attempted">0</span> correct
+      &nbsp;&middot;&nbsp;
+      <span id="stat-remaining">—</span> puzzles remaining
+    </div>
+  </header>
+
+  <main>
+    <div class="puzzle-area">
+
+      <!-- Board -->
+      <div class="board-wrapper">
+        <div id="board" style="width: 480px"></div>
+      </div>
+
+      <!-- Side panel -->
+      <div class="info-panel">
+
+        <div id="status" class="status-banner">Loading&hellip;</div>
+
+        <div id="game-info" class="game-info">
+          <div class="info-row">
+            <span class="label">Opponent</span>
+            <span id="info-opponent" class="value">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Date</span>
+            <span id="info-date" class="value">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Time control</span>
+            <span id="info-tc" class="value">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Phase</span>
+            <span id="info-phase" class="value">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Move</span>
+            <span id="info-move" class="value">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Eval</span>
+            <span id="info-eval" class="value">—</span>
+          </div>
+        </div>
+
+        <div id="result-detail" class="result-detail hidden"></div>
+
+        <div class="controls">
+          <button id="next-btn" class="btn">Next Puzzle</button>
+          <a id="game-link" class="btn btn-outline" href="#" target="_blank" rel="noopener">
+            View Game
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+  <!-- App -->
+  <script src="/static/js/puzzle.js"></script>
+</body>
+</html>

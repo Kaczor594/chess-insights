@@ -1,6 +1,6 @@
 # Claude Code Handoff — Chess Insights
 
-> Last updated: 2026-04-10
+> Last updated: 2026-04-14
 > Repo: https://github.com/Kaczor594/chess-insights.git
 > Branch: master
 
@@ -14,6 +14,8 @@ Chess Insights is an automated chess analytics pipeline for **kaczor594** (Chess
 - **Working:** Daily automation via `launchd` runs `scripts/daily_sync.sh` which fetches new games (kaczor594/Chess.com only), analyzes up to 50, renders the Quarto site, and pushes `docs/` to GitHub.
 - **Working:** 6-page site: Overview, Centipawn Loss trends, Openings, Game Phases, Time Management, About.
 - **Working:** `best_move_san` column on `moves` table — stores engine best move in SAN notation (e.g., `Bxf6`, `O-O`). Populated automatically for new games via Stockfish analysis pipeline. Backfilled for all historical data (99.9% coverage, 417 NULLs from non-standard-position Lichess games).
+- **Working:** `fen` and `puzzle_solved` columns on `moves` table — `fen` stores the board FEN before each move (backfilled for all historical data), `puzzle_solved` tracks which positions have been solved in the puzzle trainer.
+- **Working:** Chess Puzzle Trainer web app (`web/`) — Flask backend with real-time Stockfish evaluation, chessboard.js frontend. Presents positions where the player made significant mistakes and challenges them to find the best move. Dynamic threshold formula adjusts difficulty based on position evaluation. Run with `python web/app.py` (port 8000).
 - **In progress:** The accuracy metric was recently swapped from an exponential formula to plain ACPL (average centipawn loss). The user plans to design a better accuracy metric in the future.
 - **Known visual fixes applied:** Dark mode theme overrides for ggplot2 and plotly, DT table readability CSS, density plot replacing violin chart.
 
@@ -65,6 +67,13 @@ python/chess_insights/   # Python CLI: fetch, analyze commands
   database/              # SQLite schema + operations
 scripts/daily_sync.sh    # Automated daily: fetch → analyze → quarto render → git push
 scripts/backfill_best_move_san.py  # One-time backfill: converts best_move UCI → SAN via board replay
+scripts/backfill_fen.py  # One-time backfill: populates fen column via PGN replay
+scripts/backfill_utils.py  # Shared backfill utilities (DB_PATH, get_connection, run_backfill)
+web/
+  app.py               # Flask puzzle trainer backend (Stockfish eval, puzzle selection)
+  templates/index.html # Puzzle trainer HTML (chessboard.js + chess.js)
+  static/css/style.css # Dark theme styles
+  static/js/puzzle.js  # Client-side puzzle logic (drag-and-drop, evaluation display)
 data/chess_insights.db   # SQLite database (~64MB, gitignored)
 docs/                    # Rendered site output (committed, serves GitHub Pages)
 config.yaml              # Stockfish path, API delay settings
@@ -76,9 +85,25 @@ config.yaml              # Stockfish path, API delay settings
 
 **R sourcing chain is linear:** Each script sources the previous one. `R/functions.R` sources `06_visualizations.R` (which loads the full chain) then overrides `theme_chess()` for dark mode, `calculate_accuracy()` to return raw ACPL instead of the exponential formula, and `calculate_opening_performance()` to sort ascending.
 
-**Database:** SQLite with 4 tables (`players`, `games`, `moves`, `sync_metadata`), 8 indexes, foreign key triggers. Access via `DBI`/`RSQLite` in R, `DatabaseManager` class in Python. The `moves` table includes `best_move` (UCI) and `best_move_san` (SAN) columns — Stockfish computes both during analysis and the pipeline stores them directly.
+**Database:** SQLite with 4 tables (`players`, `games`, `moves`, `sync_metadata`), 9 indexes (including composite index on `moves(puzzle_solved, centipawn_loss, eval_before)` for puzzle queries), foreign key triggers. Access via `DBI`/`RSQLite` in R, `DatabaseManager` class in Python. The `moves` table includes `best_move` (UCI), `best_move_san` (SAN), `fen` (board state before move), and `puzzle_solved` (0/1 tracker for the puzzle trainer).
 
 ## Recent Changes
+
+### Session 2026-04-14
+- Built Chess Puzzle Trainer web app (`web/`): Flask backend + chessboard.js frontend with real-time Stockfish evaluation, three-tier grading (perfect/pass/fail), dynamic threshold formula
+- Added `fen TEXT` and `puzzle_solved INTEGER DEFAULT 0` columns to `moves` table; backfilled FEN for all historical data via `scripts/backfill_fen.py`
+- Re-analyzed 5,133 extreme-eval positions with Stockfish to populate `mate_in_n_before`/`mate_in_n_after` data; added SQL filter to exclude forced-mate-against positions from puzzles
+- **Codebase cleanup (12 items from `.claude/cleanup_report.md`):**
+  - Removed dead `is_book_move` placeholder from schema, operations, and analyze pipeline
+  - Removed unused `white_player_id`/`black_player_id` from `get_puzzle_data()` query
+  - Moved puzzle threshold filtering from Python loop to SQL `ln()` expression
+  - Replaced `ELIGIBLE_PUZZLES` in-memory list with `ORDER BY RANDOM() LIMIT 1` SQL query
+  - Refactored DB connections to use Flask `g` object with `teardown_appcontext` (single connection per request, automatic cleanup)
+  - Added lightweight `get_eval_context()` query for evaluate endpoint (6 fields, 1 JOIN instead of 14 fields, 3 JOINs)
+  - Added composite index `idx_moves_puzzle_eligible(puzzle_solved, centipawn_loss, eval_before)`
+  - Extracted shared `scripts/backfill_utils.py` from duplicate backfill boilerplate
+  - Extracted `updateRemainingCount()` JS helper from duplicated jQuery selector
+  - Updated CLAUDE.md and CLAUDE_HANDOFF.md with web app documentation
 
 ### Session 2026-04-10
 - Added `best_move_san` TEXT column to `moves` table (schema, operations, analyze pipeline)

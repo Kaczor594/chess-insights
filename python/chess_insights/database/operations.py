@@ -153,8 +153,8 @@ class DatabaseManager:
         mate_in_n_after: Optional[int] = None,
         best_move: Optional[str] = None,
         best_move_san: Optional[str] = None,
+        fen: Optional[str] = None,
         game_phase: Optional[str] = None,
-        is_book_move: bool = False,
     ) -> int:
         """Insert a move record."""
         with self.get_connection() as conn:
@@ -165,7 +165,7 @@ class DatabaseManager:
                     clock_time_remaining, time_spent, pct_time_used,
                     eval_before, eval_after, centipawn_loss,
                     is_mate_before, is_mate_after, mate_in_n_before, mate_in_n_after,
-                    best_move, best_move_san, game_phase, is_book_move
+                    best_move, best_move_san, fen, game_phase
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
@@ -173,7 +173,7 @@ class DatabaseManager:
                     clock_time_remaining, time_spent, pct_time_used,
                     eval_before, eval_after, centipawn_loss,
                     int(is_mate_before), int(is_mate_after), mate_in_n_before, mate_in_n_after,
-                    best_move, best_move_san, game_phase, int(is_book_move)
+                    best_move, best_move_san, fen, game_phase
                 )
             )
             return cursor.lastrowid
@@ -188,13 +188,13 @@ class DatabaseManager:
                     clock_time_remaining, time_spent, pct_time_used,
                     eval_before, eval_after, centipawn_loss,
                     is_mate_before, is_mate_after, mate_in_n_before, mate_in_n_after,
-                    best_move, best_move_san, game_phase, is_book_move
+                    best_move, best_move_san, fen, game_phase
                 ) VALUES (
                     :game_id, :ply_number, :color, :san, :uci,
                     :clock_time_remaining, :time_spent, :pct_time_used,
                     :eval_before, :eval_after, :centipawn_loss,
                     :is_mate_before, :is_mate_after, :mate_in_n_before, :mate_in_n_after,
-                    :best_move, :best_move_san, :game_phase, :is_book_move
+                    :best_move, :best_move_san, :fen, :game_phase
                 )
                 """,
                 moves

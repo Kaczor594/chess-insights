@@ -115,8 +115,8 @@ def analyze_single_game(
             "mate_in_n_after": eval_after.mate_in_n,
             "best_move": eval_before.best_move,
             "best_move_san": eval_before.best_move_san,
+            "fen": move.board_before.fen(),
             "game_phase": phases[i] if i < len(phases) else "middlegame",
-            "is_book_move": 0,  # TODO: Implement book detection
         })
 
     # Delete any existing moves for this game (in case of re-analysis)
