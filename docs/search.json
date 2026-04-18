@@ -4,14 +4,14 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This site displays automated chess analytics for kaczor594 on chesscom.\nGames are fetched daily via the Chess.com public API using a custom Python pipeline. Each game’s PGN is parsed and every move is analyzed with Stockfish (depth 15–25) to compute per-move evaluations and centipawn loss.\n\nTotal games in database: 5556\nFully analyzed games: 5547\nTotal moves analyzed: 370,560\nAnalysis runs daily via a scheduled launchd job"
+    "text": "This site displays automated chess analytics for kaczor594 on chesscom.\nGames are fetched daily via the Chess.com public API using a custom Python pipeline. Each game’s PGN is parsed and every move is analyzed with Stockfish (depth 15–25) to compute per-move evaluations and centipawn loss.\n\nTotal games in database: 5557\nFully analyzed games: 5548\nTotal moves analyzed: 370,631\nAnalysis runs daily via a scheduled launchd job"
   },
   {
     "objectID": "about.html#data-collection",
     "href": "about.html#data-collection",
     "title": "About",
     "section": "",
-    "text": "This site displays automated chess analytics for kaczor594 on chesscom.\nGames are fetched daily via the Chess.com public API using a custom Python pipeline. Each game’s PGN is parsed and every move is analyzed with Stockfish (depth 15–25) to compute per-move evaluations and centipawn loss.\n\nTotal games in database: 5556\nFully analyzed games: 5547\nTotal moves analyzed: 370,560\nAnalysis runs daily via a scheduled launchd job"
+    "text": "This site displays automated chess analytics for kaczor594 on chesscom.\nGames are fetched daily via the Chess.com public API using a custom Python pipeline. Each game’s PGN is parsed and every move is analyzed with Stockfish (depth 15–25) to compute per-move evaluations and centipawn loss.\n\nTotal games in database: 5557\nFully analyzed games: 5548\nTotal moves analyzed: 370,631\nAnalysis runs daily via a scheduled launchd job"
   },
   {
     "objectID": "about.html#performance-metric-average-centipawn-loss-acpl",
@@ -39,7 +39,7 @@
     "href": "about.html#technology-stack",
     "title": "About",
     "section": "Technology Stack",
-    "text": "Technology Stack\n\nData pipeline: Python (python-chess, requests)\nEngine: Stockfish\nDatabase: SQLite\nAnalytics: R (tidyverse, plotly, DBI)\nSite: Quarto → GitHub Pages\n\n\nLast updated: April 17, 2026 at 03:46 CEST"
+    "text": "Technology Stack\n\nData pipeline: Python (python-chess, requests)\nEngine: Stockfish\nDatabase: SQLite\nAnalytics: R (tidyverse, plotly, DBI)\nSite: Quarto → GitHub Pages\n\n\nLast updated: April 18, 2026 at 03:11 CEST"
   },
   {
     "objectID": "phases.html#phase-acpl-over-time",
@@ -88,14 +88,14 @@
     "href": "index.html",
     "title": "Chess Insights Dashboard",
     "section": "",
-    "text": "5547\nAnalyzed Games\n\n\n\n\n276.5\nAvg Centipawn Loss\n\n\n\n\nFeb 2015 — Apr 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
+    "text": "5548\nAnalyzed Games\n\n\n\n\n276.4\nAvg Centipawn Loss\n\n\n\n\nFeb 2015 — Apr 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
   },
   {
     "objectID": "index.html#overview",
     "href": "index.html#overview",
     "title": "Chess Insights Dashboard",
     "section": "",
-    "text": "5547\nAnalyzed Games\n\n\n\n\n276.5\nAvg Centipawn Loss\n\n\n\n\nFeb 2015 — Apr 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
+    "text": "5548\nAnalyzed Games\n\n\n\n\n276.4\nAvg Centipawn Loss\n\n\n\n\nFeb 2015 — Apr 2026\nDate Range\n\n\n\n\n900+10\nMost Played"
   },
   {
     "objectID": "index.html#recent-performance",
