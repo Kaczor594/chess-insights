@@ -15,6 +15,7 @@
 - **R**: Packages auto-install on first source. Entry point is `R/functions.R`.
 - **Quarto**: `~/.local/bin/quarto` (v1.6.42). `quarto render` builds to `docs/`, `quarto preview` for local dev.
 - **Stockfish**: Path configured in `config.yaml`
+- **Puzzle Trainer**: Auto-starts at login via `~/Library/LaunchAgents/com.chessinsights.puzzles.plist` on port 8000. Restart with `launchctl kickstart -k gui/$(id -u)/com.chessinsights.puzzles`. Logs in `~/Library/Logs/chess-insights/`. Do not also run `python web/app.py` manually while the agent is loaded — port conflict.
 
 ## Key Files
 

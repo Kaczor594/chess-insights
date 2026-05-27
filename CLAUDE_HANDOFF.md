@@ -1,6 +1,6 @@
 # Claude Code Handoff — Chess Insights
 
-> Last updated: 2026-04-14
+> Last updated: 2026-05-27
 > Repo: https://github.com/Kaczor594/chess-insights.git
 > Branch: master
 
@@ -15,7 +15,7 @@ Chess Insights is an automated chess analytics pipeline for **kaczor594** (Chess
 - **Working:** 6-page site: Overview, Centipawn Loss trends, Openings, Game Phases, Time Management, About.
 - **Working:** `best_move_san` column on `moves` table — stores engine best move in SAN notation (e.g., `Bxf6`, `O-O`). Populated automatically for new games via Stockfish analysis pipeline. Backfilled for all historical data (99.9% coverage, 417 NULLs from non-standard-position Lichess games).
 - **Working:** `fen` and `puzzle_solved` columns on `moves` table — `fen` stores the board FEN before each move (backfilled for all historical data), `puzzle_solved` tracks which positions have been solved in the puzzle trainer.
-- **Working:** Chess Puzzle Trainer web app (`web/`) — Flask backend with real-time Stockfish evaluation, chessboard.js frontend. Presents positions where the player made significant mistakes and challenges them to find the best move. Dynamic threshold formula adjusts difficulty based on position evaluation. Run with `python web/app.py` (port 8000).
+- **Working:** Chess Puzzle Trainer web app (`web/`) — Flask backend with real-time Stockfish evaluation, chessboard.js frontend. Presents positions where the player made significant mistakes and challenges them to find the best move. Dynamic threshold formula adjusts difficulty based on position evaluation. Auto-starts at login via LaunchAgent `com.chessinsights.puzzles` on port 8000 (see Environment Setup).
 - **In progress:** The accuracy metric was recently swapped from an exponential formula to plain ACPL (average centipawn loss). The user plans to design a better accuracy metric in the future.
 - **Known visual fixes applied:** Dark mode theme overrides for ggplot2 and plotly, DT table readability CSS, density plot replacing violin chart.
 
@@ -42,6 +42,8 @@ quarto preview             # local dev server
 ```
 
 **GitHub Pages:** Configured to deploy from `master` branch, `/docs` folder.
+
+**Puzzle Trainer LaunchAgent:** `~/Library/LaunchAgents/com.chessinsights.puzzles.plist` runs `venv/bin/python web/app.py` at login, serves on `http://localhost:8000/` (IPv4 only — Flask doesn't bind `::1`). Logs in `~/Library/Logs/chess-insights/puzzles.{log,err.log}`. Startup takes ~10s while Stockfish loads. Ops: `launchctl kickstart -k gui/$(id -u)/com.chessinsights.puzzles` to restart. Do NOT also start `python web/app.py` from a terminal — an orphan process will hold port 8000 and the agent will fail to bind on next restart.
 
 ## File Structure
 
@@ -88,6 +90,12 @@ config.yaml              # Stockfish path, API delay settings
 **Database:** SQLite with 4 tables (`players`, `games`, `moves`, `sync_metadata`), 9 indexes (including composite index on `moves(puzzle_solved, centipawn_loss, eval_before)` for puzzle queries), foreign key triggers. Access via `DBI`/`RSQLite` in R, `DatabaseManager` class in Python. The `moves` table includes `best_move` (UCI), `best_move_san` (SAN), `fen` (board state before move), and `puzzle_solved` (0/1 tracker for the puzzle trainer).
 
 ## Recent Changes
+
+### Session 2026-05-27
+- Wired up `com.chessinsights.puzzles` LaunchAgent so the Puzzle Trainer auto-starts at login (no more "Safari can't reach localhost:8000" when the terminal isn't open)
+- Created `~/Library/LaunchAgents/com.chessinsights.puzzles.plist` (`RunAtLoad=true`, `KeepAlive=true`, `ThrottleInterval=10`) and `~/Library/Logs/chess-insights/`
+- Cleaned up a stale `python web/app.py` orphan that was holding port 8000 and blocking the agent from binding
+- No code changes to the repo this session — only LaunchAgent infra outside the repo. Daily auto-commits continued in `docs/` between sessions
 
 ### Session 2026-04-14
 - Built Chess Puzzle Trainer web app (`web/`): Flask backend + chessboard.js frontend with real-time Stockfish evaluation, three-tier grading (perfect/pass/fail), dynamic threshold formula
