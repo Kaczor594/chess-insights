@@ -6,7 +6,7 @@ database_path: data/chess_insights.db
 # Stockfish engine configuration
 stockfish:
   # Path to Stockfish executable
-  path: /Users/isaackaczor/Downloads/stockfish/stockfish-macos-m1-apple-silicon
+  path: /path/to/stockfish
 
   # Default analysis depth (15, 18, 20, or 25)
   default_depth: 15

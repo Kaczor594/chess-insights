@@ -46,3 +46,11 @@ _freeze/
 Thumbs.db
 
 /.quarto/
+
+# Internal dev notes / local artifacts
+CLAUDE.md
+CLAUDE_HANDOFF.md
+COMMANDS.md
+.claude/
+logs/
+*.log
